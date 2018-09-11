@@ -49,13 +49,11 @@ Gitは、コンテンツアドレスMerkle DAGデータモデルを用いるこ�
 
 
 \section{Background}
-
-This section reviews important properties of successful peer-to-peer systems, which IPFS combines.
-
+このセクションではIPFSに組み込まれているピアツーピアシステムで成功を納めている重要な要素についてレビューしていきます。
 \subsection{Distributed Hash Tables}
 
 Distributed Hash Tables (DHTs) are widely used to coordinate and maintain metadata about peer-to-peer systems. For example, the BitTorrent MainlineDHT tracks sets of peers part of a torrent swarm.
-
+分散ハッシュデーブル(DHTs)はピアツーピアシステムに関するメタデータを広く、保持し
 \subsubsection{Kademlia DHT}
 
 Kademlia~\cite{maymounkov02} is a popular DHT that provides:
@@ -358,28 +356,7 @@ Let the \textit{debt ratio} $ r $ between a node and its peer be:
 Given $r$, let the probability of sending to a debtor be:
   \[ P\Big( \; send \; | \; r \;\Big) = 1 - \dfrac{1}{1 + exp(6-3r)} \]
 
-\begin{figure}
-\centering
-\begin{tikzpicture}[domain=0:4]
 
-    \draw[->] (-0,0) -- (4.2,0) node[right] {$r$};
-    \draw[->] (0,-0) -- (0,1.20) node[above] {$P(\;send\;|\;r\;)$};
-
-    %ticks
-    \foreach \x in {0,...,4}
-      \draw (\x,1pt) -- (\x,-3pt)
-        node[anchor=north] {\x};
-
-    \foreach \y in {1,...,1}
-      \draw (1pt,\y) -- (-3pt,\y)
-        node[anchor=east] {\y};
-
-    \draw[color=red] plot[] function{1 - 1/(1+exp(6-3*x))};
-
-\end{tikzpicture}
-\caption{Probability of Sending as $r$ increases}
-\label{fig:psending-graph}
-\end{figure}
 
 As you can see in Figure \ref{fig:psending-graph}, this function drops off quickly as the nodes'
 \textit{debt ratio} surpasses twice the established credit.
@@ -779,45 +756,6 @@ indirect blocks. Since \texttt{lists} can contain other \texttt{lists}, topologi
 
 
 \begin{figure}
-\centering
-\begin{tikzpicture}[->,>=stealth',auto,thick,
-  minimum height=2em,minimum width=5em]
-
-  \tikzstyle{ghost}=[rectangle,rounded corners=.8ex];
-  \tikzstyle{block}=[rectangle,draw,fill=blue!20,rounded corners=.8ex];
-  \tikzstyle{list}=[rectangle,draw,fill=cyan!20,rounded corners=.8ex];
-  \tikzstyle{tree}=[rectangle,draw,fill=green!20,rounded corners=.8ex];
-  \tikzstyle{commit}=[rectangle,draw,fill=magenta!20,rounded corners=.8ex];
-  \tikzstyle{every path}=[draw]
-
-  \node[commit] (ccc111) {ccc111};
-  \node[tree]   (ttt111) [below=3em of ccc111] {ttt111};
-  \node[tree]   (ttt222) [below left=3em and 3em of ttt111] {ttt222};
-  \node[tree]   (ttt333) [below=3em of ttt111] {ttt333};
-  \node[ghost]  (ghost1) [below right=3em and 3em of ttt111] {};
-  \node[list]   (lll111) [below=3em of ttt333] {lll111};
-  \node[block]  (bbb111) [below=3em of ttt222] {bbb111};
-  \node[block]  (bbb222) [below right=3em and 3em of ttt333] {bbb222};
-  \node[block]  (bbb333) [below left=3em and 3em of lll111] {bbb333};
-  \node[block]  (bbb444) [below=3em of lll111] {bbb444};
-  \node[block]  (bbb555) [below right=3em and 3em of lll111] {bbb555};
-
-  \path[every node/.style={font=\sffamily\small}]
-    (ccc111) edge[out=-90,in=90] (ttt111)
-    (ttt111) edge[out=-90,in=90] (ttt222)
-             edge[out=-90,in=90] (ttt333)
-             to  [out=-90,in=90]  (ghost1)
-             to  [out=-90,in=90] (bbb222)
-    (ttt222) edge[out=-90,in=90] (bbb111)
-    (ttt333) edge[out=-90,in=90] (lll111)
-             edge[out=-90,in=90] (bbb222)
-    (lll111) edge[out=-90,in=90] (bbb333)
-             edge[out=-90,in=90] (bbb444)
-             edge[out=-90,in=90] (bbb555)
-  ;
-
-\end{tikzpicture}
-\caption{Sample Object Graph} \label{fig:sample-object-graph}
 
 \begin{verbatim}
     > ipfs file-cat <ccc111-hash> --json
