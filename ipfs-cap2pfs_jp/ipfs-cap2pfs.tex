@@ -25,20 +25,28 @@
 
 \maketitle
 \begin{abstract}
-
+IPFS(インタープラネタリーファイルシステム)は、全てのコンピュターデバイスを同じファイルシステムに接続するためのピアーツーピア分散ファイルシステムです。ある意味、IPFSはWebに似ていますが一つのGitレポジトリー内でオブジェクト交換を行うBitTorrentのスウォームとみなすことができる。言い換えれば、IPFSは、コンテンツのアドレスのハイパーリンクを持つ高スループットコンテンツアドレスブロックストレージモデルを提供します。 これは、一般化されたMerkle DAGを作り出します。用途としては、バージョン管理ファイルシステム、ブロックチェーン、さらには永続するWebを構築するための有用です。 IPFSは、分散ハッシュテーブル、インセンティブ設計があるブロック交換、自己認証名前空間の知識を組み合わせて構成されています。 またIPFSには単一障害点はなく、ノードは互いに信頼する必要はありません。
 \end{abstract}
 
 \section{Introduction}
+グローバルな分散ファイルシステムの構築には多くの試みが行われてきました。いくつかのシステムは大きな成功を収め、他のシステムは失敗に終わってしまいました。学問的な試みの中では、AFS〜\cite{AFS}は成功した事例で、今でもなお使用されています。その他〜\cite{Oceanstore、CFS}などのシステムは同じようにはうまくいきませんでした。
+学術系以外の取り組みとして最も成功したシステムは、主に大容量メディア（オーディオおよびビデオ）向けのピアツーピアファイル共有アプリケーションでした。その中で最も顕著なのは、Napster、KaZaA、BitTorrent~\cite{BitTorrentUsers}などが1億人以上のユーザーを支援することができる大規模なファイル配信システムを提供したことです。今日でさえ、BitTorrentは、毎日数千万のノードが入れ替わりにで大規模なネットワークを維持しています。これらのアプリケーションでは、学術的に作られたファイルシステムよりも多くのユーザーとファイルが配布されていました。しかし、アプリケーションは、基盤となるインフラストラクチャとして設計されていませんでした。\footnote{例えば、BitTorrentを使ってディスクイメージを転送したり、Blizzard、Inc.はそれを使ってビデオゲームコンテンツを配信しています。}そのため、これまでグローバルな低レイテンシのもっと一般的な分散ファイルシステムは登場していませんでした。
 
-There have been many attempts at constructing a global distributed file system. Some systems have seen significant success, and others failed completely. Among the academic attempts, AFS~\cite{AFS} has succeeded widely and is still in use today. Others~\cite{Oceanstore, CFS} have not attained the same success. Outside of academia, the most successful systems have been peer-to-peer file-sharing applications primarily geared toward large media (audio and video). Most notably, Napster, KaZaA, and BitTorrent~\cite{BitTorrentUsers} deployed large file distribution systems supporting over 100 million simultaneous users. Even today, BitTorrent maintains a massive deployment where tens of millions of nodes churn daily~\cite{wang13}. These applications saw greater numbers of users and files distributed than their academic file system counterparts. However, the applications were not designed as infrastructure to be built upon. While there have been successful repurposings\footnote{For example, Linux distributions use BitTorrent to transmit disk images, and  Blizzard, Inc. uses it to distribute video game content.}, no general file-system has emerged that offers global, low-latency, and decentralized distribution.
+この理由はおそらく、大部分のユースケースには十分に良いHTTPというシステムがすでに存在しているからです。HTTPはこれまでに利用可能なシステムのなかで最も成功した ``分散シファイルシステム''です。ブラウザと組み合わせることでHTTPは、技術的および社会的に大きなインパクトを生みました。HTTPはインターネットを介してファイルを送信するデファクトスタンダードなっています。しかし、過去15年間に発明された何十もの素晴らしいファイル配布技術を取り入れることに失敗しています。 この理由として有力な観点は、後方互換性の制約の数と現状のモデルに投資している強力なプレイヤーの数を考慮すると、Webインフラストラクチャの進化は、ほぼ不可能です。しかし、別の観点では、HTTPの出現以降も、新しいプロトコルが登場して広く利用されています。なので欠けているのは、現在のHTTP Webを強化し、ユーザーエクスペリエンスを損なうことなく新しい機能を導入するという設計のアップグレードなのです。
 
-Perhaps this is because a ``good enough'' system for most use cases already exists: HTTP.  By far, HTTP is the most successful ``distributed system of files'' ever deployed. Coupled with the browser, HTTP has had enormous technical and social impact. It has become the de facto way to transmit files across the internet. Yet, it fails to take advantage of dozens of brilliant file distribution techniques invented in the last fifteen years. From one perspective, evolving Web infrastructure is near-impossible, given the number of backwards compatibility constraints and the number of strong parties invested in the current model. But from another perspective, new protocols have emerged and gained wide use since the emergence of HTTP. What is lacking is upgrading design: enhancing the current HTTP web, and introducing new functionality without degrading user experience.
+小さなサイズのファイルを移動の場合、トラフィックの多い小規模な組織であっても、比較的安価であるため、業界ではこれまでHTTPが使われてきました。しかし、我々は、データの送受信に関して新たな時代へ突入しようとしています。その例をいくつか挙げます。
+（a）ペタバイトのデータセットホスト/配布（b）組織全体で大規模データを利用/計算（c）大容量の高画質オンデマンドまたはリアルタイムメディア配信（d）大規模なデータセットのバージョン管理とリンク（e）重要なファイルの偶発的な削除の防止などが挙げられます。重要な機能のためや帯域幅の問題のために、私たちは既に異なるデータ配信プロトコルを使い、HTTPをあきらめています。Webの次のステップは、それらHTTP以外のデータ通信プロトコルをWeb自体の一部にすることです。
 
-Industry has gotten away with using HTTP this long because moving small files around is relatively cheap, even for small organizations with lots of traffic. But we are entering a new era of data distribution with new challenges: (a) hosting and distributing petabyte datasets, (b) computing on large data across organizations, (c) high-volume high-definition on-demand or real-time media streams, (d) versioning and linking of massive datasets, (e) preventing accidental disappearance of important files, and more. Many of these can be boiled down to ``lots of data, accessible everywhere.'' Pressed by critical features and bandwidth concerns, we have already given up HTTP for different data distribution protocols. The next step is making them part of the Web itself.
 
-Orthogonal to efficient data distribution, version control systems have managed to develop important data collaboration workflows. Git, the distributed source code version control system, developed many useful ways to model and implement distributed data operations. The Git toolchain offers versatile versioning functionality that large file distribution systems severely lack. New solutions inspired by Git are emerging, such as Camlistore~\cite{Camlistore}, a personal file storage system, and Dat~\cite{Dat} a data collaboration toolchain and dataset package manager. Git has already influenced distributed filesystem design~\cite{mashtizadeh13}, as its content addressed Merkle DAG data model enables powerful file distribution strategies. What remains to be explored is how this data structure can influence the design of high-throughput oriented file systems, and how it might upgrade the Web itself.
+HTTPプロトコルは小容量のデータのやりとりに関して比較的安価で行うことを実現する一方で我々はデータ転送に関して新たな時代に突入しつつあります。それは(a)ペタバイト級データのホストと配信 (b)組織横断の大量データ処理 (c)大容量高画質のオンデマンドのコンテンツストリーミング(d)大規模データのバージョン管理およびリンク処理(e)重要データの消失防止、というようなものが要求される時代です。このような状況のもと、我々はHTTPを捨てて新たなデータ転送プロトコルを開発しました。次のステップはこれをWebそのものにすることが必要です。
 
-This paper introduces IPFS, a novel peer-to-peer version-controlled filesystem seeking to reconcile these issues. IPFS synthesizes learnings from many past successful systems. Careful interface-focused integration yields a system greater than the sum of its parts. The central IPFS principle is modeling \textit{all data} as part of the same Merkle DAG.
+効率的なデータ配信とは別軸で、バージョン管理システムは重要なデータの協業ワークフロー開発を可能にしました。 分散ソースコードバージョン管理システムであるGitは、分散データの処理をモデル化して実装するたときの多くの有用な方法を作り出しました。 Gitツールチェーンは、大規模なファイル配布システムには欠けている多彩なバージョン管理機能を提供してくれます。 Camlistore〜\cite{Camlistore}、パーソナルファイルストレージシステム、データコラボレーションツールチェーンとデータセットパッケージマネージャーのDat〜\cite {Dat}など、Gitに触発された新しいソリューションが登場しています。
+Gitは、コンテンツアドレスMerkle DAGデータモデルを用いることによって強力なファイル分散戦略を可能にし、分散ファイルシステムの設計〜\cite{mashtizadeh13}に既に影響を与えています。
+どのデータ構造がハイスループット指向のファイルシステムの設計に良いのか、どのようにWeb自体をアップグレードするかについては、まだ探求中です。
+
+この論文では、これらの問題を解決するための新しいピアツーピアのバージョン管理ファイルシステムであるIPFSを紹介します。 IPFSは過去の多くの成功したシステムから学び、新しいものを作っています。 インターフェイスを重視した統合を慎重に行うことで、細かいパーツの合計よりも大きなシステムとなります。 中心的なIPFSの原則は、同じMerkle DAGの一部として\textit {すべてのデータ}をモデリングすることです。
+
+
 
 \section{Background}
 
@@ -1141,3 +1149,4 @@ IPFS is the synthesis of many great ideas and systems. It would be impossible to
 %\balancecolumns
 %\subsection{References}
 \end{document}
+
