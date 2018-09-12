@@ -51,26 +51,22 @@ Gitは、コンテンツアドレスMerkle DAGデータモデルを用いるこ�
 \section{Background}
 このセクションではIPFSに組み込まれているピアツーピアシステムで成功を納めている重要な要素についてレビューしていきます。
 \subsection{Distributed Hash Tables}
-
-Distributed Hash Tables (DHTs) are widely used to coordinate and maintain metadata about peer-to-peer systems. For example, the BitTorrent MainlineDHT tracks sets of peers part of a torrent swarm.
-分散ハッシュデーブル(DHTs)はピアツーピアシステムに関するメタデータを広く、保持し
+分散ハッシュデーブル(DHTs)はピアツーピアシステムに関するメタデータを広く分配して保持しする仕組みとして使われます。
 \subsubsection{Kademlia DHT}
 
-Kademlia~\cite{maymounkov02} is a popular DHT that provides:
+Kademlia~\cite{maymounkov02} は人気の高いDHTです:
 
 \begin{enumerate}
 
-  \item Efficient lookup through massive networks:
-        queries on average contact $ \ceil{log_2 (n)} $ nodes.
-        (e.g. $20$ hops for a network of $10,000,000$ nodes).
+  \item 膨大なネットワーク上で効率的な検索が可能:
+        システムの全ノード数を$n$とするとき、問い合わせ対象は、平均$\ceil{log_2 (n)}$のオーダーのホップ数でたどり着ける。
+        (e.g. ネットワーク全体に$10,000,000$ ノード存在するとき、$log_2(10,000,000)\approx 20$このホップでたどり着ける 。)
 
-  \item Low coordination overhead: it optimizes the number of
-        control messages it sends to other nodes.
+  \item オーバヘッドが低い:ノード間で送受信されるいくつものコントロールメッセージが最適化されている。
 
-  \item Resistance to various attacks by preferring long-lived nodes.
+  \item 長く使われているノードを優先する設計で様々な攻撃に対する耐性がある。
 
-  \item Wide usage in peer-to-peer applications, including \\
-        Gnutella and BitTorrent, forming networks of over 20 million nodes~\cite{wang13}.
+  \item GnutellaやBitTorrentなどのピアツーピアアプリケーションで使われた実績があり、2000万ノード以上のがネットワーク形成に成功している。~\cite{wang13}.
 
  \end{enumerate}
 
