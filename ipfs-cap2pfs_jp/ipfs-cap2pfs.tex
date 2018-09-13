@@ -72,93 +72,69 @@ Kademlia~\cite{maymounkov02} は人気の高いDHTです:
 
 
 \subsubsection{Coral DSHT}
-
-While some peer-to-peer filesystems store data blocks directly in DHTs,
-this ``wastes storage and bandwidth, as data must be stored at nodes where it
-is not needed''~\cite{freedman04}. The Coral DSHT extends Kademlia in three
-particularly important ways:
-
+いくつかのピアツーピアファイルシステムではデータブロックを直接DHTに保管します。
+この場合、必要のないノードにもデータを保管するしなくてはならず、ストレージと帯域幅を無駄にします。〜\cite {freedman04} Coral DSHTはKademlia DHTに対して3つに重要な拡張を行いました。
 \begin{enumerate}
 
-  \item Kademlia stores values in nodes whose ids are ``nearest'' (using
-        XOR-distance) to the key. This does not take into account application
-        data locality, ignores ``far'' nodes that may already have the data,
-        and forces ``nearest'' nodes to store it, whether they need it or not.
-        This wastes significant storage and bandwith. Instead, Coral stores
-        addresses to peers who can provide the data blocks.
+  \item Kademliaでは、XOR距離を用いてデータのキーの値にもっとも近いノードidをもつノードに値を格納します。 ここでは、データを格納するノードがその情報を必要か否かによらず、XOR距離がもっとも近いノードに保管させ、アプリケーションがどこに配置されているかや、アプリの都合ですでにデータを持っているノードなどを考慮せず行われています。そのため、重要なストレージと帯域幅が無駄になっていました。Coralでは代わりに誰がブロックデータを持っているかのアドレスを提供することにしました。
+        
 
-  \item Coral relaxes the DHT API from \texttt{get\_value(key)} to
-        \texttt{get\_any\_values(key)} (the ``sloppy'' in DSHT).
-        This still works since Coral users only need a single (working) peer,
-        not the complete list. In return, Coral can distribute only subsets of
-        the values to the ``nearest'' nodes, avoiding hot-spots (overloading
-        \textit{all the nearest nodes} when a key becomes popular).
+  \item Coralは、DHTのAPIにおいて\texttt{get\_value(key)}を
+        \texttt{get\_any\_values(key)}に緩和しています（Distributed Sloppy Hash TableのSloppyの由来）。これによりkeyへのアクセスが増加した際に特定のノードに負荷が集中しホットスポットになることを防いでいます。
 
-  \item Additionally, Coral organizes a hierarchy of separate DSHTs called
-        \textit{clusters} depending on region and size. This enables nodes to
-        query peers in their region first, ``finding nearby data without
-        querying distant nodes''~\cite{freedman04} and greatly reducing the latency
-        of lookups.
-
+  \item さらにCoralでは、サイズや範囲によって\textit{clusters}と呼ばれるDHSTの階層構造を構築します。はじめに\textit{clusters}内で対象のデータの問い合わせを行い、遠いノードへの問い合わせを行わなくても良い設計になっています~\cite{freedman04}。そうすることで検索にかかる時間を大幅に短縮することができます。
 \end{enumerate}
 
 \subsubsection{S/Kademlia DHT}
 
-S/Kademlia~\cite{baumgart07} extends Kademlia to protect against malicious attacks in two particularly important ways:
-
+S/Kademlia~\cite{baumgart07}は、Kademliaを悪意のある攻撃を防ぐために以下の重要な二つの点で拡張しています。
 \begin{enumerate}
 
-  \item S/Kademlia provides schemes to secure \texttt{NodeId} generation,
-        and prevent Sybil attacks. It requires nodes to create a PKI key pair, derive their identity from it, and sign their messages to each other. One scheme includes a proof-of-work crypto puzzle to make generating Sybils expensive.
+  \item S/Kademlia ではセキュアな\texttt{NodeId}生成を行いシビル攻撃の耐性を向上しています。
+具体的には、ノードに対してPKI keyのペアの生成要求し、それを用いてアイデンティティーを確保し、お互いにメッセージに署名を行うようにしています。シビルアタックのコストを上げるための一つの方法はProof of workを使うことです。
 
-  \item S/Kademlia nodes lookup values over disjoint paths, in order to
-        ensure honest nodes can connect to each other in the presence of a large fraction of adversaries in the network. S/Kademlia achieves a success rate of 0.85 even with an adversarial fraction as large as half of the nodes.
+  \item S/Kademliaでは、ネットワークの大部分が悪意のあるノードである状況でも、データ検索時にホネストノード同士が接続できるよう、分離されたパス上の値も参照できます。S / Kademliaでは、ノードの半分程度が悪意のあるノードの場合でも85\%の割合でデータの参照ができます。
 
 \end{enumerate}
 
 \subsection{Block Exchanges - BitTorrent}
 
-BitTorrent~\cite{cohen03} is a widely successful peer-to-peer filesharing system, which succeeds in coordinating networks of untrusting peers (swarms) to cooperate in distributing pieces of files to each other. Key features from BitTorrent and its ecosystem that inform IPFS design include:
+BitTorrent~\cite{cohen03}は、ピア（swarm）のネットワークにおいて、トレストレスにファイルピース(ファイルの断片)を互いに配布することに成功し、広く使われているピアツーピアファイル共有システムです。 IPFS設計を行う際に、BitTorrentとそのエコシステムから取り入れた機能は次の通りです。
 
 \begin{enumerate}
-  \item BitTorrent's data exchange protocol uses a quasi tit-for-tat strategy
-        that rewards nodes who contribute to each other, and punishes nodes who only leech others' resources.
+  \item BitTorrentのデータ交換プロトコルは、データの送受信でネットワークに貢献するノードに報酬を与え、他人のリソースを奪うだけのノードを処罰するため疑似tit-for-tat(しっぺ返し)戦略という仕組みを採用しています。
 
-  \item BitTorrent peers track the availability of file pieces, prioritizing
-        sending rarest pieces first. This takes load off seeds, making non-seed peers capable of trading with each other.
+  \item  BitTorrentピアはファイルの可用性を追跡し、最初に希少なファイルピースを優先して送信します。 これは、(ファイルを丸ごと持っているピアである)シードの負荷を下げ、非シードのピア同士が互いにファイルピースを取引できるようにします。
 
-  \item BitTorrent's standard tit-for-tat is vulnerable to some exploitative
-        bandwidth sharing strategies. PropShare~\cite{levin08} is a different peer bandwidth allocation strategy that better resists exploitative strategies, and improves the performance of swarms.
-
+  \item 上で挙げて、BitTorrentでのデフォルトで設定されているtit-for-tat戦略は、帯域幅の搾取(exploitative bandwidth sharing strategies)に対して脆弱性があります。 PropShare~\cite{levin08}は、この脆弱性を改善し、swarmのパフォーマンスを向上させ、ピアごとに帯域幅割り当てる戦略です。
 \end{enumerate}
 
 \subsection{Version Control Systems - Git}
-
-Version Control Systems provide facilities to model files changing over time and distribute different versions efficiently. The popular version control system Git provides a powerful Merkle DAG \footnote{Merkle Directed Acyclic Graph -- similar but more general construction than a Merkle Tree. Deduplicated, does not need to be balanced, and non-leaf nodes contain data.} object model that captures changes to a filesystem tree in a distributed-friendly way.
+バージョン管理システムは、時間の経過とともに編集され変化するファイルをモデル化し、異なるバージョンを効率的に配布すことを可能にします。 一般的なバージョン管理システムであるGitは、変更点をファイルシステムツリーとして蓄積するオブジェクトモデルで、分散システムフレンドリーな　Merkle DAGが採用されています。 \footnote {Merkle Directed Acyclic Graphは、Merkle Treeと似ていますが、より一般的な構造をとります。具体的には、重複除外、リーフの数の調整が必要ない、リーフノードにはデータが含まれないという特徴があります。\textcolor{red}{Merkle DAG Merkle Treeの違いがぼんやりとしかわかっていない。}}
 
 \begin{enumerate}
-  \item Immutable objects represent Files (\texttt{blob}), Directories (\texttt{tree}), and Changes (\texttt{commit}).
-  \item Objects are content-addressed, by the cryptographic hash of their contents.
-  \item Links to other objects are embedded, forming a Merkle DAG. This
-  provides many useful integrity and workflow properties.
-  \item Most versioning metadata (branches, tags, etc.) are simply pointer references, and thus inexpensive to create and update.
-  \item Version changes only update references or add objects.
-  \item Distributing version changes to other users is simply transferring objects and updating remote references.
+  \item ファイル(\texttt{blob}),ディレクトリー(\texttt{tree}), 変更(\texttt{commit})は、作成後は状態が変わらないオブジェクトとして表現されます。.
+  \item それらのオブジェクトは、コンテンツを暗号学的にハッシュ化したアドレスによって参照されます。
+  \item Merkle DAGを用いて他のオブジェクトへのリンクが埋め込まれます。Merkle DAGを利用することで、データの完全性とワークフローのプロパティーをユーザーに提供します。
+  \item ほとんどのバージョン管理用の(ブランチやタグなどの)メタデータは、参照先を指すポインターであるため、作成と更新は安価です。
+  \item バージョンの変更では、オブジェクトの追加と参照先の更新のみが行われます。
+  \item Distributing version changes to other users is simply transferring objects and updating remote references.バージョン変更を他のユーザーに配布する場合、単に更新履歴を含むオブジェクトを送信しリモートでそれを参照し、自分のデータを更新することができます。(\textcolor{red}{この訳でいいか不安})
 \end{enumerate}
 
 \subsection{Self-Certified Filesystems - SFS}
 
-SFS~\cite{mazieres98, mazieres00} proposed compelling implementations of both (a) distributed trust chains, and (b) egalitarian shared global namespaces. SFS introduced a technique for building \textit{Self-Certified Filesystems}: addressing remote filesystems using the following scheme
-
+SFS~\cite{mazieres98, mazieres00} は、分散トラストチェーンと平等な共有名前空間を実現するために必要な実装です。\textit{Self-Certified Filesystems}を導入するために以下に示す方法でリモートファイルシステムにおけるファイルのアドレスを定義します。
 \begin{verbatim}
       /sfs/<Location>:<HostID>
 \end{verbatim}
 
-\noindent where \texttt{Location} is the server network address, and:
+\noindent ここで \texttt{Location} は、サーバーのネットワークアドレスで、\textit{Host ID}は、
 
 \begin{verbatim}
       HostID = hash(public_key || Location)
 \end{verbatim}
+
+で定義します。
 
 Thus the \textit{name} of an SFS file system certifies its server. The user can verify the public key offered by the server, negotiate a shared secret, and secure all traffic. All SFS instances share a global namespace where name allocation is cryptographic, not gated by any centralized body.
 
