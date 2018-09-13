@@ -9,5 +9,9 @@ For papers that you can read to understand IPFS and the underlying technologies,
 
 This repo is primarily the work of @jbenet -- if you're interested in pursuing academic publishing of IPFS, parts of it, or relates systems, get in touch. There is a large constellation of research to be done around IPFS.
 
+# Style of sentense
+
+です、ます調で行う。
+
 # Lisence
 All lisense belongs to https://github.com/ipfs/papers.
