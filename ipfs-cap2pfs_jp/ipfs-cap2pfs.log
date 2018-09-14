@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.8.1-180226-2.6 (utf8.euc) (TeX Live 2018) (preloaded format=platex 2018.9.11)  14 SEP 2018 11:50
+This is e-pTeX, Version 3.14159265-p3.8.1-180226-2.6 (utf8.euc) (TeX Live 2018) (preloaded format=platex 2018.9.11)  14 SEP 2018 12:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -607,168 +607,174 @@ Overfull \hbox (9.94414pt too wide) in paragraph at lines 201--201
 LaTeX Warning: Citation `WebRTC' on page \thepage  undefined on input line 221.
 
 
+
+Overfull \hbox (9.08432pt too wide) in paragraph at lines 223--224
+[]\T1/aer/bx/n/9 Reliability: \T1/aer/m/n/9 IPFS \JY1/mc/m/it/9 は 、 \T1/aer/m
+/n/9 uTP (LED-BAT [14]) \JY1/mc/m/it/9 や \T1/aer/m/n/9 SCTP [15]
+ []
+
 [4]
-Overfull \hbox (1.94928pt too wide) in paragraph at lines 314--315
+Overfull \hbox (1.94928pt too wide) in paragraph at lines 316--317
 \T1/aer/m/n/9 possible), to Bit-Thief [8] (ex-ploit-ing a vul-ner-a-bil-ity and
  never
  []
 
 
-Overfull \hbox (2.86789pt too wide) in paragraph at lines 319--321
+Overfull \hbox (2.86789pt too wide) in paragraph at lines 321--323
 []\T1/aer/m/n/9 be ef-fec-tive with and re-sis-tant to other, un-known strate-
  []
 
 
 LaTeX Warning: Reference `fig:psending-graph' on page \thepage  undefined on in
-put line 336.
+put line 338.
 
 
-Overfull \hbox (1.67198pt too wide) in paragraph at lines 336--347
+Overfull \hbox (1.67198pt too wide) in paragraph at lines 338--349
 \T1/aer/m/n/9 as the nodes' \T1/aer/m/it/9 debt ra-tio \T1/aer/m/n/9 sur-passes
  twice the es-tab-lished credit.
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 430--430
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 432--432
 []      \T1/aett/m/n/9 send_block (block :Block) -> (complete :Bool);[] 
  []
 
 [5]
-Overfull \hbox (4.7758pt too wide) in paragraph at lines 456--462
+Overfull \hbox (4.7758pt too wide) in paragraph at lines 458--464
 \T1/aett/m/n/9 last_seen \T1/aer/m/n/9 times-tamp. Then, it com-pares the re-ce
 ived \T1/aett/m/n/9 Ledger
  []
 
 
-Overfull \hbox (13.81113pt too wide) in paragraph at lines 466--470
+Overfull \hbox (13.81113pt too wide) in paragraph at lines 468--472
 []\T1/aer/m/n/9 While the con-nec-tion is open, nodes ad-ver-tise their \T1/aet
 t/m/n/9 want_list
  []
 
 [6]
-Overfull \hbox (4.14857pt too wide) in paragraph at lines 576--576
+Overfull \hbox (4.14857pt too wide) in paragraph at lines 578--578
  []\T1/aett/m/n/9 XLYkgq61DYaQ8NhkcqyU7rLcnSa7dSHQ16x 189458 less[] 
  []
 
 
-Overfull \hbox (8.8645pt too wide) in paragraph at lines 576--576
+Overfull \hbox (8.8645pt too wide) in paragraph at lines 578--578
  []\T1/aett/m/n/9 XLHBNmRQ5sJJrdMPuu48pzeyTtRo39tNDR5 19441 script[] 
  []
 
 
-Overfull \hbox (13.58043pt too wide) in paragraph at lines 576--576
+Overfull \hbox (13.58043pt too wide) in paragraph at lines 578--578
  []\T1/aett/m/n/9 XLF4hwVHsVuZ78FZK6fozf8Jj9WEURMbCX4 5286 template[] 
  []
 
 
-Overfull \hbox (8.43875pt too wide) in paragraph at lines 578--579
+Overfull \hbox (8.43875pt too wide) in paragraph at lines 580--581
 []\T1/aer/m/n/9 Resolve string path lookups, such as \T1/aett/m/n/9 foo/bar/baz
 \T1/aer/m/n/9 . Given
  []
 
 [7]
-Overfull \hbox (1.43738pt too wide) in paragraph at lines 710--715
+Overfull \hbox (1.43738pt too wide) in paragraph at lines 712--717
 \T1/aer/m/n/9 made up of sev-eral IPFS \T1/aett/m/n/9 blobs \T1/aer/m/n/9 con-c
 ate-nated to-gether. \T1/aett/m/n/9 lists
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 730--730
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 732--732
 []    \T1/aett/m/n/9 { "hash": "XLYkgq61DYaQ8NhkcqyU7rLcnSa7dSHQ16x",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 730--730
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 732--732
 []    \T1/aett/m/n/9 { "hash": "XLHBNmRQ5sJJrdMPuu48pzeyTtRo39tNDR5",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 730--730
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 732--732
 []    \T1/aett/m/n/9 { "hash": "XLWVQDqxo9Km9zLyquoC9gAP8CL1gWnHZ7z",[] 
  []
 
 [8]
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 795--795
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 797--797
 []    \T1/aett/m/n/9 { "hash": "XLYkgq61DYaQ8NhkcqyU7rLcnSa7dSHQ16x",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 795--795
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 797--797
 []    \T1/aett/m/n/9 { "hash": "XLHBNmRQ5sJJrdMPuu48pzeyTtRo39tNDR5",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 795--795
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 797--797
 []    \T1/aett/m/n/9 { "hash": "XLWVQDqxo9Km9zLyquoC9gAP8CL1gWnHZ7z",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 818--818
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 820--820
 []    \T1/aett/m/n/9 { "hash": "XLa1qMBKiSEEDhojb9FFZ4tEvLf7FEQdhdU",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 818--818
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 820--820
 []    \T1/aett/m/n/9 { "hash": "XLGw74KAy9junbh28x7ccWov9inu1Vo7pnX",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 818--818
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 820--820
 []    \T1/aett/m/n/9 { "hash": "XLF2ipQ4jD3UdeX5xp1KBgeHRhemUtaA8Vm",[] 
  []
 
 
 LaTeX Warning: Citation `RabinFingerprints' on page \thepage  undefined on inpu
-t line 842.
+t line 844.
 
 
-LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 842.
+LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 844.
 
 
-LaTeX Warning: Citation `rsync' on page \thepage  undefined on input line 843.
+LaTeX Warning: Citation `rsync' on page \thepage  undefined on input line 845.
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 885--885
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 887--887
 []    \T1/aett/m/n/9 "name": "ttt333-name/lll111-name/bbb222-name" },[] 
  []
 
 [9]
 
-LaTeX Warning: Citation `Plan9' on page \thepage  undefined on input line 900.
+LaTeX Warning: Citation `Plan9' on page \thepage  undefined on input line 902.
 
 
-LaTeX Warning: Citation `Fossil' on page \thepage  undefined on input line 900.
+LaTeX Warning: Citation `Fossil' on page \thepage  undefined on input line 902.
 
 
 
-LaTeX Warning: Citation `Venti' on page \thepage  undefined on input line 900.
+LaTeX Warning: Citation `Venti' on page \thepage  undefined on input line 902.
 
 
-LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 900.
+LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 902.
 
 
-Overfull \hbox (9.94414pt too wide) in paragraph at lines 976--976
+Overfull \hbox (9.94414pt too wide) in paragraph at lines 978--978
 []\T1/aett/m/n/9 ipfs link /<alice-pk-hash>/friends/bob /<bob-pk-hash>[] 
  []
 
 
-Overfull \hbox (19.37599pt too wide) in paragraph at lines 976--976
+Overfull \hbox (19.37599pt too wide) in paragraph at lines 978--978
 []\T1/aett/m/n/9 ipfs link /<eve-pk-hash>/friends/alice /<alice-pk-hash>[] 
  []
 
 
 LaTeX Warning: Citation `Proquint' on page \thepage  undefined on input line 99
-6.
+8.
 
 
-Overfull \hbox (3.25519pt too wide) in paragraph at lines 1023--1024
+Overfull \hbox (3.25519pt too wide) in paragraph at lines 1025--1026
 []\T1/aer/m/n/9 As a mounted global filesys-tem, un-der \T1/aett/m/n/9 /ipfs \T
 1/aer/m/n/9 and \T1/aett/m/n/9 /ipns\T1/aer/m/n/9 . 
  []
 
 [10]
 
-LaTeX Warning: Citation `FUSE' on page \thepage  undefined on input line 1042.
+LaTeX Warning: Citation `FUSE' on page \thepage  undefined on input line 1044.
 
 (./ipfs-cap2pfs.bbl
 
@@ -798,4 +804,4 @@ Here is how much of TeX's memory you used:
  929 hyphenation exceptions out of 8191
  55i,11n,54p,894b,342s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on ipfs-cap2pfs.dvi (12 pages, 99460 bytes).
+Output written on ipfs-cap2pfs.dvi (12 pages, 100776 bytes).

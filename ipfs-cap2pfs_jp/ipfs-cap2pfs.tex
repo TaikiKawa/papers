@@ -214,20 +214,20 @@ IPFSでは、システムで使われる関数を特定の関数やその組み�
 このように冗長性を持たせることによって、(a)(強いセキュリティーが必要な場合やスピードが求められる場合など)ユースケースを考慮して関数を選ぶことができます。(b)暗号学の発展やより良い関数が発明さてたときに新しく良いものを利用でき、それらに互換性をもったせることができます。
 
 \subsection{Network}
-
-IPFS nodes communicate regularly with hundreds of other nodes in the network, potentially across the wide internet. The IPFS network stack features:
+IPFSのノードは、幅広い範囲のネットワーク上の何百もの他のノードと通信をしています。
+ここでは、IPFSのネットワークスタックの特徴について説明します。
 
 \begin{itemize}
-  \item \textbf{Transport:} IPFS can use any transport protocol, and is best suited for WebRTC DataChannels~\cite{WebRTC} (for browser connectivity) or uTP(LEDBAT~\cite{LEDBAT}).
-  \item \textbf{Reliability:} IPFS can provide reliability if underlying networks do not provide it, using uTP (LEDBAT~\cite{LEDBAT}) or SCTP~\cite{SCTP}.
-  \item \textbf{Connectivity:} IPFS also uses the ICE NAT traversal techniques \cite{ICE}.
-  \item \textbf{Integrity:} optionally checks integrity of messages using a hash checksum.
-  \item \textbf{Authenticity:} optionally checks authenticity of messages by digitally signing them with the sender's private key.
+  \item \textbf{Transport:} IPFSは、どのトランスポート層のプロトコルも利用できます。特に、WebRTC DataChannels~\cite{WebRTC} (for browser connectivity)やuTP(LEDBAT~\cite{LEDBAT}).
+  との相性がいいです。
+  \item \textbf{Reliability:} IPFSは、uTP (LEDBAT~\cite{LEDBAT})やSCTP~\cite{SCTP}を利用することで、下位のネットワークに信頼性がなくても信頼性を確保できます。
+  \item \textbf{Connectivity:} IPFSは、ICE-NAT-traversal\cite{ICE}を利用しています。
+  \item \textbf{Integrity:} オプションとして、メッセージのチェックサムを利用してメッセージの完全性を確認できます。
+  \item \textbf{Authenticity:} オプションとして、メッセージの送り手の秘密鍵を用いてデジタル署名をメッセージに添付することができ、これを検証することができます。
 \end{itemize}
 
 \subsubsection{Note on Peer Addressing}
-
-IPFS can use any network; it does not rely on or assume access to IP. This allows IPFS to be used in overlay networks. IPFS stores addresses as \texttt{multiaddr} formatted byte strings for the underlying network to use. \texttt{multiaddr} provides a way to express addresses and their protocols, including support for encapsulation. For example:
+IPFSでは、任意のネットワークを使用することができます。 これは、インターネットプロトコル(IP)のみを頼り、それのみにアクセスするということではありません\footnote{したがって、IPやそのバージョンにも依存しません(翻訳者注)}。 そのため、オーバーレイネットワークでもIPFSを使用することができます。 IPFSは、使用するネットワークに関するアドレスを\texttt {multiaddr}フォーマットでバイト列として保存します。 \texttt {multiaddr}は、使用しているネットワークのプロトコルとそこでのアドレスを記録し、それらをカプセル化する技術を提供します。 例えば、
 
 \begin{verbatim}
   # an SCTP/IPv4 connection
@@ -236,6 +236,8 @@ IPFS can use any network; it does not rely on or assume access to IP. This allow
   # an SCTP/IPv4 connection proxied over TCP/IPv4
   /ip4/5.6.7.8/tcp/5678/ip4/1.2.3.4/sctp/1234/
 \end{verbatim}
+
+のように記述されます。
 
 \subsection{Routing}
 
