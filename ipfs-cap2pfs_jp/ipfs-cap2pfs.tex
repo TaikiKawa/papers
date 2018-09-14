@@ -241,10 +241,11 @@ IPFSでは、任意のネットワークを使用することができます。 
 
 \subsection{Routing}
 
-IPFS nodes require a routing system that can find (a) other peers' network addresses and (b) peers who can serve particular objects. IPFS achieves this using a DSHT based on S/Kademlia and Coral, using the properties discussed in 2.1. The size of objects and use patterns of IPFS are similar to Coral \cite{freedman04} and Mainline~\cite{wang13}, so the IPFS DHT makes a distinction for values stored based on their size. Small values (equal to or less than \texttt{1KB}) are stored directly on the DHT. For larger values, the DHT stores references, which are the \texttt{NodeIds} of peers who can serve the block.
+IPFSのノードは、(a)他のピアノネットワークアドレスと(b)特定のオブジェクトを誰が提供できるのかの両方を見つけるためのルーティングシステムが必要になります。IPFSでは、これを実現するためにSection2.1で説明したS/Kademlia と Coralを基にした、DSHTを用いています。
 
-The interface of this DSHT is the following:
+オブジェクトのサイズとIPFSでの使用方法は、Coral\cite{freedman04}とMainline~\cite{wang13}に似ています。そのため、IPFSにおけるDHTは、そのオブジェクトのサイズに応じて保存する値を決定します。 \texttt{1KB}以下の小さなオブジェクトは、DHTに直接保存されます。大きなサイズの場合、DHTでは、どのピアがそのオブジェクトに関するブロックを提供できるかの参照先を記述します。
 
+ここまでで述べたDSHTのインターフェイスは、以下です:
 \begin{verbatim}
 
   type IPFSRouting interface {
@@ -266,7 +267,8 @@ The interface of this DSHT is the following:
   }
 \end{verbatim}
 
-Note: different use cases will call for substantially different routing systems (e.g. DHT in wide network, static HT in local network). Thus the IPFS routing system can be swapped for one that fits users' needs. As long as the interface above is met, the rest of the system will continue to function.
+Note: このルーティングシステムは、それぞれのユースケースの合わせて、DHT以外を用いることもできます。(例えば、広域なネットワークであればDHTで良いですが、ローカルネットワークであれば、static-HTなども使用できます。) そのため、IPFSは、ユーザーのニーズに合わせて使いたいルーティングシステムに取り替え可能です。異なるルーティングシステムを運用する際、インターフェイスが
+既存もので十分で有る限り、その他の機能はそのままで動作します。
 
 \subsection{Block Exchange - BitSwap Protocol}
 
