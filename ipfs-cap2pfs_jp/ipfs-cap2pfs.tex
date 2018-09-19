@@ -5,6 +5,7 @@
 \usetikzlibrary{trees}
 \usetikzlibrary{positioning}
 
+
 \usepackage{array}
 \usepackage{amstext}
 \usepackage{mathtools}
@@ -12,7 +13,7 @@
 
 \begin{document}
 
-\title{IPFS - Content Addressed, Versioned, P2P File System (DRAFT 3)}
+\title{IPFS - Content Addressed, Versioned, P2P File System (DRAFT 3 Japanese version)}
 \subtitle{}
 
 \numberofauthors{1}
@@ -25,173 +26,151 @@
 
 \maketitle
 \begin{abstract}
-
+IPFS(インタープラネタリーファイルシステム)は、全てのコンピュターデバイスを同じファイルシステムに接続するためのピアーツーピア分散ファイルシステムです。ある意味、IPFSはWebに似ていますが一つのGitレポジトリー内でオブジェクト交換を行うBitTorrentのスウォームとみなすことができる。言い換えれば、IPFSは、コンテンツのアドレスのハイパーリンクを持つ高スループットコンテンツアドレスブロックストレージモデルを提供します。 これは、一般化されたMerkle DAGを作り出します。用途としては、バージョン管理ファイルシステム、ブロックチェーン、さらには永続するWebを構築するための有用です。 IPFSは、分散ハッシュテーブル、インセンティブ設計があるブロック交換、自己認証名前空間の知識を組み合わせて構成されています。 またIPFSには単一障害点はなく、ノードは互いに信頼する必要はありません。
 \end{abstract}
 
 \section{Introduction}
+グローバルな分散ファイルシステムの構築には多くの試みが行われてきました。いくつかのシステムは大きな成功を収め、他のシステムは失敗に終わってしまいました。学問的な試みの中では、AFS〜\cite{AFS}は成功した事例で、今でもなお使用されています。その他〜\cite{Oceanstore、CFS}などのシステムは同じようにはうまくいきませんでした。
+学術系以外の取り組みとして最も成功したシステムは、主に大容量メディア（オーディオおよびビデオ）向けのピアツーピアファイル共有アプリケーションでした。その中で最も顕著なのは、Napster、KaZaA、BitTorrent~\cite{BitTorrentUsers}などが1億人以上のユーザーを支援することができる大規模なファイル配信システムを提供したことです。今日でさえ、BitTorrentは、毎日数千万のノードが入れ替わりにで大規模なネットワークを維持しています。これらのアプリケーションでは、学術的に作られたファイルシステムよりも多くのユーザーとファイルが配布されていました。しかし、アプリケーションは、基盤となるインフラストラクチャとして設計されていませんでした。\footnote{例えば、BitTorrentを使ってディスクイメージを転送したり、Blizzard、Inc.はそれを使ってビデオゲームコンテンツを配信しています。}そのため、これまでグローバルな低レイテンシのもっと一般的な分散ファイルシステムは登場していませんでした。
 
-There have been many attempts at constructing a global distributed file system. Some systems have seen significant success, and others failed completely. Among the academic attempts, AFS~\cite{AFS} has succeeded widely and is still in use today. Others~\cite{Oceanstore, CFS} have not attained the same success. Outside of academia, the most successful systems have been peer-to-peer file-sharing applications primarily geared toward large media (audio and video). Most notably, Napster, KaZaA, and BitTorrent~\cite{BitTorrentUsers} deployed large file distribution systems supporting over 100 million simultaneous users. Even today, BitTorrent maintains a massive deployment where tens of millions of nodes churn daily~\cite{wang13}. These applications saw greater numbers of users and files distributed than their academic file system counterparts. However, the applications were not designed as infrastructure to be built upon. While there have been successful repurposings\footnote{For example, Linux distributions use BitTorrent to transmit disk images, and  Blizzard, Inc. uses it to distribute video game content.}, no general file-system has emerged that offers global, low-latency, and decentralized distribution.
+この理由はおそらく、大部分のユースケースには十分に良いHTTPというシステムがすでに存在しているからです。HTTPはこれまでに利用可能なシステムのなかで最も成功した ``分散シファイルシステム''です。ブラウザと組み合わせることでHTTPは、技術的および社会的に大きなインパクトを生みました。HTTPはインターネットを介してファイルを送信するデファクトスタンダードなっています。しかし、過去15年間に発明された何十もの素晴らしいファイル配布技術を取り入れることに失敗しています。 この理由として有力な観点は、後方互換性の制約の数と現状のモデルに投資している強力なプレイヤーの数を考慮すると、Webインフラストラクチャの進化は、ほぼ不可能です。しかし、別の観点では、HTTPの出現以降も、新しいプロトコルが登場して広く利用されています。なので欠けているのは、現在のHTTP Webを強化し、ユーザーエクスペリエンスを損なうことなく新しい機能を導入するという設計のアップグレードなのです。
 
-Perhaps this is because a ``good enough'' system for most use cases already exists: HTTP.  By far, HTTP is the most successful ``distributed system of files'' ever deployed. Coupled with the browser, HTTP has had enormous technical and social impact. It has become the de facto way to transmit files across the internet. Yet, it fails to take advantage of dozens of brilliant file distribution techniques invented in the last fifteen years. From one perspective, evolving Web infrastructure is near-impossible, given the number of backwards compatibility constraints and the number of strong parties invested in the current model. But from another perspective, new protocols have emerged and gained wide use since the emergence of HTTP. What is lacking is upgrading design: enhancing the current HTTP web, and introducing new functionality without degrading user experience.
+小さなサイズのファイルを移動の場合、トラフィックの多い小規模な組織であっても、比較的安価であるため、業界ではこれまでHTTPが使われてきました。しかし、我々は、データの送受信に関して新たな時代へ突入しようとしています。その例をいくつか挙げます。
+（a）ペタバイトのデータセットホスト/配布（b）組織全体で大規模データを利用/計算（c）大容量の高画質オンデマンドまたはリアルタイムメディア配信（d）大規模なデータセットのバージョン管理とリンク（e）重要なファイルの偶発的な削除の防止などが挙げられます。重要な機能のためや帯域幅の問題のために、私たちは既に異なるデータ配信プロトコルを使い、HTTPをあきらめています。Webの次のステップは、それらHTTP以外のデータ通信プロトコルをWeb自体の一部にすることです。
 
-Industry has gotten away with using HTTP this long because moving small files around is relatively cheap, even for small organizations with lots of traffic. But we are entering a new era of data distribution with new challenges: (a) hosting and distributing petabyte datasets, (b) computing on large data across organizations, (c) high-volume high-definition on-demand or real-time media streams, (d) versioning and linking of massive datasets, (e) preventing accidental disappearance of important files, and more. Many of these can be boiled down to ``lots of data, accessible everywhere.'' Pressed by critical features and bandwidth concerns, we have already given up HTTP for different data distribution protocols. The next step is making them part of the Web itself.
 
-Orthogonal to efficient data distribution, version control systems have managed to develop important data collaboration workflows. Git, the distributed source code version control system, developed many useful ways to model and implement distributed data operations. The Git toolchain offers versatile versioning functionality that large file distribution systems severely lack. New solutions inspired by Git are emerging, such as Camlistore~\cite{Camlistore}, a personal file storage system, and Dat~\cite{Dat} a data collaboration toolchain and dataset package manager. Git has already influenced distributed filesystem design~\cite{mashtizadeh13}, as its content addressed Merkle DAG data model enables powerful file distribution strategies. What remains to be explored is how this data structure can influence the design of high-throughput oriented file systems, and how it might upgrade the Web itself.
+HTTPプロトコルは小容量のデータのやりとりに関して比較的安価で行うことを実現する一方で我々はデータ転送に関して新たな時代に突入しつつあります。それは(a)ペタバイト級データのホストと配信 (b)組織横断の大量データ処理 (c)大容量高画質のオンデマンドのコンテンツストリーミング(d)大規模データのバージョン管理およびリンク処理(e)重要データの消失防止、というようなものが要求される時代です。このような状況のもと、我々はHTTPを捨てて新たなデータ転送プロトコルを開発しました。次のステップはこれをWebそのものにすることが必要です。
 
-This paper introduces IPFS, a novel peer-to-peer version-controlled filesystem seeking to reconcile these issues. IPFS synthesizes learnings from many past successful systems. Careful interface-focused integration yields a system greater than the sum of its parts. The central IPFS principle is modeling \textit{all data} as part of the same Merkle DAG.
+効率的なデータ配信とは別軸で、バージョン管理システムは重要なデータの協業ワークフロー開発を可能にしました。 分散ソースコードバージョン管理システムであるGitは、分散データの処理をモデル化して実装するたときの多くの有用な方法を作り出しました。 Gitツールチェーンは、大規模なファイル配布システムには欠けている多彩なバージョン管理機能を提供してくれます。 Camlistore〜\cite{Camlistore}、パーソナルファイルストレージシステム、データコラボレーションツールチェーンとデータセットパッケージマネージャーのDat〜\cite {Dat}など、Gitに触発された新しいソリューションが登場しています。
+Gitは、コンテンツアドレスMerkle DAGデータモデルを用いることによって強力なファイル分散戦略を可能にし、分散ファイルシステムの設計〜\cite{mashtizadeh13}に既に影響を与えています。
+どのデータ構造がハイスループット指向のファイルシステムの設計に良いのか、どのようにWeb自体をアップグレードするかについては、まだ探求中です。
+
+この論文では、これらの問題を解決するための新しいピアツーピアのバージョン管理ファイルシステムであるIPFSを紹介します。 IPFSは過去の多くの成功したシステムから学び、新しいものを作っています。 インターフェイスを重視した統合を慎重に行うことで、細かいパーツの合計よりも大きなシステムとなります。 中心的なIPFSの原則は、同じMerkle DAGの一部として\textit {すべてのデータ}をモデリングすることです。
+
+
 
 \section{Background}
-
-This section reviews important properties of successful peer-to-peer systems, which IPFS combines.
-
+このセクションではIPFSに組み込まれているピアツーピアシステムで成功を納めている重要な要素についてレビューしていきます。
 \subsection{Distributed Hash Tables}
-
-Distributed Hash Tables (DHTs) are widely used to coordinate and maintain metadata about peer-to-peer systems. For example, the BitTorrent MainlineDHT tracks sets of peers part of a torrent swarm.
-
+分散ハッシュデーブル(DHTs)はピアツーピアシステムに関するメタデータを広く分配して保持しする仕組みとして使われます。
 \subsubsection{Kademlia DHT}
 
-Kademlia~\cite{maymounkov02} is a popular DHT that provides:
+Kademlia~\cite{maymounkov02} は人気の高いDHTです:
 
 \begin{enumerate}
 
-  \item Efficient lookup through massive networks:
-        queries on average contact $ \ceil{log_2 (n)} $ nodes.
-        (e.g. $20$ hops for a network of $10,000,000$ nodes).
+  \item 膨大なネットワーク上で効率的な検索が可能:
+        システムの全ノード数を$n$とするとき、問い合わせ対象は、平均$\ceil{log_2 (n)}$のオーダーのホップ数でたどり着ける。
+        (e.g. ネットワーク全体に$10,000,000$ ノード存在するとき、$log_2(10,000,000)\approx 20$このホップでたどり着ける 。)
 
-  \item Low coordination overhead: it optimizes the number of
-        control messages it sends to other nodes.
+  \item オーバヘッドが低い:ノード間で送受信されるいくつものコントロールメッセージが最適化されている。
 
-  \item Resistance to various attacks by preferring long-lived nodes.
+  \item 長く使われているノードを優先する設計で様々な攻撃に対する耐性がある。
 
-  \item Wide usage in peer-to-peer applications, including \\
-        Gnutella and BitTorrent, forming networks of over 20 million nodes~\cite{wang13}.
+  \item GnutellaやBitTorrentなどのピアツーピアアプリケーションで使われた実績があり、2000万ノード以上のがネットワーク形成に成功している。~\cite{wang13}.
 
  \end{enumerate}
 
 
 \subsubsection{Coral DSHT}
-
-While some peer-to-peer filesystems store data blocks directly in DHTs,
-this ``wastes storage and bandwidth, as data must be stored at nodes where it
-is not needed''~\cite{freedman04}. The Coral DSHT extends Kademlia in three
-particularly important ways:
-
+いくつかのピアツーピアファイルシステムではデータブロックを直接DHTに保管します。
+この場合、必要のないノードにもデータを保管するしなくてはならず、ストレージと帯域幅を無駄にします。〜\cite {freedman04} Coral DSHTはKademlia DHTに対して3つに重要な拡張を行いました。
 \begin{enumerate}
 
-  \item Kademlia stores values in nodes whose ids are ``nearest'' (using
-        XOR-distance) to the key. This does not take into account application
-        data locality, ignores ``far'' nodes that may already have the data,
-        and forces ``nearest'' nodes to store it, whether they need it or not.
-        This wastes significant storage and bandwith. Instead, Coral stores
-        addresses to peers who can provide the data blocks.
+  \item Kademliaでは、XOR距離を用いてデータのキーの値にもっとも近いノードidをもつノードに値を格納します。 ここでは、データを格納するノードがその情報を必要か否かによらず、XOR距離がもっとも近いノードに保管させ、アプリケーションがどこに配置されているかや、アプリの都合ですでにデータを持っているノードなどを考慮せず行われています。そのため、重要なストレージと帯域幅が無駄になっていました。Coralでは代わりに誰がブロックデータを持っているかのアドレスを提供することにしました。
+        
 
-  \item Coral relaxes the DHT API from \texttt{get\_value(key)} to
-        \texttt{get\_any\_values(key)} (the ``sloppy'' in DSHT).
-        This still works since Coral users only need a single (working) peer,
-        not the complete list. In return, Coral can distribute only subsets of
-        the values to the ``nearest'' nodes, avoiding hot-spots (overloading
-        \textit{all the nearest nodes} when a key becomes popular).
+  \item Coralは、DHTのAPIにおいて\texttt{get\_value(key)}を
+        \texttt{get\_any\_values(key)}に緩和しています（Distributed Sloppy Hash TableのSloppyの由来）。これによりkeyへのアクセスが増加した際に特定のノードに負荷が集中しホットスポットになることを防いでいます。
 
-  \item Additionally, Coral organizes a hierarchy of separate DSHTs called
-        \textit{clusters} depending on region and size. This enables nodes to
-        query peers in their region first, ``finding nearby data without
-        querying distant nodes''~\cite{freedman04} and greatly reducing the latency
-        of lookups.
-
+  \item さらにCoralでは、サイズや範囲によって\textit{clusters}と呼ばれるDHSTの階層構造を構築します。はじめに\textit{clusters}内で対象のデータの問い合わせを行い、遠いノードへの問い合わせを行わなくても良い設計になっています~\cite{freedman04}。そうすることで検索にかかる時間を大幅に短縮することができます。
 \end{enumerate}
 
 \subsubsection{S/Kademlia DHT}
 
-S/Kademlia~\cite{baumgart07} extends Kademlia to protect against malicious attacks in two particularly important ways:
-
+S/Kademlia~\cite{baumgart07}は、Kademliaを悪意のある攻撃を防ぐために以下の重要な二つの点で拡張しています。
 \begin{enumerate}
 
-  \item S/Kademlia provides schemes to secure \texttt{NodeId} generation,
-        and prevent Sybil attacks. It requires nodes to create a PKI key pair, derive their identity from it, and sign their messages to each other. One scheme includes a proof-of-work crypto puzzle to make generating Sybils expensive.
+  \item S/Kademlia ではセキュアな\texttt{NodeId}生成を行いシビル攻撃の耐性を向上しています。
+具体的には、ノードに対してPKI keyのペアの生成要求し、それを用いてアイデンティティーを確保し、お互いにメッセージに署名を行うようにしています。シビルアタックのコストを上げるための一つの方法はProof of workを使うことです。
 
-  \item S/Kademlia nodes lookup values over disjoint paths, in order to
-        ensure honest nodes can connect to each other in the presence of a large fraction of adversaries in the network. S/Kademlia achieves a success rate of 0.85 even with an adversarial fraction as large as half of the nodes.
+  \item S/Kademliaでは、ネットワークの大部分が悪意のあるノードである状況でも、データ検索時にホネストノード同士が接続できるよう、分離されたパス上の値も参照できます。S / Kademliaでは、ノードの半分程度が悪意のあるノードの場合でも85\%の割合でデータの参照ができます。
 
 \end{enumerate}
 
 \subsection{Block Exchanges - BitTorrent}
 
-BitTorrent~\cite{cohen03} is a widely successful peer-to-peer filesharing system, which succeeds in coordinating networks of untrusting peers (swarms) to cooperate in distributing pieces of files to each other. Key features from BitTorrent and its ecosystem that inform IPFS design include:
+BitTorrent~\cite{cohen03}は、ピア（swarm）のネットワークにおいて、トレストレスにファイルピース(ファイルの断片)を互いに配布することに成功し、広く使われているピアツーピアファイル共有システムです。 IPFS設計を行う際に、BitTorrentとそのエコシステムから取り入れた機能は次の通りです。
 
 \begin{enumerate}
-  \item BitTorrent's data exchange protocol uses a quasi tit-for-tat strategy
-        that rewards nodes who contribute to each other, and punishes nodes who only leech others' resources.
+  \item BitTorrentのデータ交換プロトコルは、データの送受信でネットワークに貢献するノードに報酬を与え、他人のリソースを奪うだけのノードを処罰するため疑似tit-for-tat(しっぺ返し)戦略という仕組みを採用しています。
 
-  \item BitTorrent peers track the availability of file pieces, prioritizing
-        sending rarest pieces first. This takes load off seeds, making non-seed peers capable of trading with each other.
+  \item  BitTorrentピアはファイルの可用性を追跡し、最初に希少なファイルピースを優先して送信します。 これは、(ファイルを丸ごと持っているピアである)シードの負荷を下げ、非シードのピア同士が互いにファイルピースを取引できるようにします。
 
-  \item BitTorrent's standard tit-for-tat is vulnerable to some exploitative
-        bandwidth sharing strategies. PropShare~\cite{levin08} is a different peer bandwidth allocation strategy that better resists exploitative strategies, and improves the performance of swarms.
-
+  \item 上で挙げて、BitTorrentでのデフォルトで設定されているtit-for-tat戦略は、帯域幅の搾取(exploitative bandwidth sharing strategies)に対して脆弱性があります。 PropShare~\cite{levin08}は、この脆弱性を改善し、swarmのパフォーマンスを向上させ、ピアごとに帯域幅割り当てる戦略です。
 \end{enumerate}
 
 \subsection{Version Control Systems - Git}
-
-Version Control Systems provide facilities to model files changing over time and distribute different versions efficiently. The popular version control system Git provides a powerful Merkle DAG \footnote{Merkle Directed Acyclic Graph -- similar but more general construction than a Merkle Tree. Deduplicated, does not need to be balanced, and non-leaf nodes contain data.} object model that captures changes to a filesystem tree in a distributed-friendly way.
+バージョン管理システムは、時間の経過とともに編集され変化するファイルをモデル化し、異なるバージョンを効率的に配布すことを可能にします。 一般的なバージョン管理システムであるGitは、変更点をファイルシステムツリーとして蓄積するオブジェクトモデルで、分散システムフレンドリーな　Merkle DAGが採用されています。 \footnote {Merkle Directed Acyclic Graphは、Merkle Treeと似ていますが、より一般的な構造をとります。具体的には、重複除外、リーフの数の調整が必要ない、リーフノードにはデータが含まれないという特徴があります。\textcolor{red}{Merkle DAG Merkle Treeの違いがぼんやりとしかわかっていない。}}
 
 \begin{enumerate}
-  \item Immutable objects represent Files (\texttt{blob}), Directories (\texttt{tree}), and Changes (\texttt{commit}).
-  \item Objects are content-addressed, by the cryptographic hash of their contents.
-  \item Links to other objects are embedded, forming a Merkle DAG. This
-  provides many useful integrity and workflow properties.
-  \item Most versioning metadata (branches, tags, etc.) are simply pointer references, and thus inexpensive to create and update.
-  \item Version changes only update references or add objects.
-  \item Distributing version changes to other users is simply transferring objects and updating remote references.
+  \item ファイル(\texttt{blob}),ディレクトリー(\texttt{tree}), 変更(\texttt{commit})は、作成後は状態が変わらないオブジェクトとして表現されます。.
+  \item それらのオブジェクトは、コンテンツを暗号学的にハッシュ化したアドレスによって参照されます。
+  \item Merkle DAGを用いて他のオブジェクトへのリンクが埋め込まれます。Merkle DAGを利用することで、データの完全性とワークフローのプロパティーをユーザーに提供します。
+  \item ほとんどのバージョン管理用の(ブランチやタグなどの)メタデータは、参照先を指すポインターであるため、作成と更新は安価です。
+  \item バージョンの変更では、オブジェクトの追加と参照先の更新のみが行われます。
+  \item Distributing version changes to other users is simply transferring objects and updating remote references.バージョン変更を他のユーザーに配布する場合、単に更新履歴を含むオブジェクトを送信しリモートでそれを参照し、自分のデータを更新することができます。(\textcolor{red}{この訳でいいか不安})
 \end{enumerate}
 
 \subsection{Self-Certified Filesystems - SFS}
 
-SFS~\cite{mazieres98, mazieres00} proposed compelling implementations of both (a) distributed trust chains, and (b) egalitarian shared global namespaces. SFS introduced a technique for building \textit{Self-Certified Filesystems}: addressing remote filesystems using the following scheme
-
+SFS~\cite{mazieres98, mazieres00} は、分散トラストチェーンと平等な共有名前空間を実現するために必要な実装です。\textit{Self-Certified Filesystems}を導入するために以下に示す方法でリモートファイルシステムにおけるファイルのアドレスを定義します。
 \begin{verbatim}
       /sfs/<Location>:<HostID>
 \end{verbatim}
 
-\noindent where \texttt{Location} is the server network address, and:
+\noindent ここで \texttt{Location} は、サーバーのネットワークアドレスで、\textit{Host ID}は、
 
 \begin{verbatim}
       HostID = hash(public_key || Location)
 \end{verbatim}
 
-Thus the \textit{name} of an SFS file system certifies its server. The user can verify the public key offered by the server, negotiate a shared secret, and secure all traffic. All SFS instances share a global namespace where name allocation is cryptographic, not gated by any centralized body.
+で定義します。
+
+したがって、SFSファイルシステムで\ textit {name}は、そのサーバの正当性を保証します。 ユーザーは、サーバーが提供する公開鍵を確認し、共有鍵を共有することで、その後のすべての通信を秘匿化することができます。 すべてのSFSインスタンスは、中央機関が管理せず、暗号学的に決定されたグローバルな名前空間によって共有されます。
+
+% serverのlocationはアクセスするとき正当性があり知っている　さらにpubkeyはそこからもらえる。その二つを通して正当なnode idにアクセスできる。逆に自分のいるlocatinに足して
+%ユーザーが探しているnode idとなるpub key生成が難しい。
+
 
 \section{IPFS Design}
+IPFSは、DHT、BitTorrent、Git、およびSFSを含む以前のピアツーピアシステムから成功したアイデアを組み合わせた分散ファイルシステムです。 IPFSのコントリビューションは、実証済みの技術を単純化し、進化させ、一つのシステムとしてまとめ上げたことです。 IPFSは、アプリケーションの作成とデプロイのための新しいプラットフォームと、大規模データの配布とバージョン管理のための新しいシステムを提供します。 したがって、IPFSはウェブ自体を進化させる可能性もあるわけです。
 
-IPFS is a distributed file system which synthesizes successful ideas from previous peer-to-peer sytems, including DHTs, BitTorrent, Git, and SFS. The contribution of IPFS is simplifying, evolving, and connecting proven techniques into a single cohesive system, greater than the sum of its parts. IPFS presents a new platform for writing and deploying applications, and a new system for distributing and versioning large data. IPFS could even evolve the web itself.
+IPFSはピアツーピアシステムで特定のノードに特権などはありません。 IPFSのノードは、ローカルストレージにIPFSのオブジェクトを保存します。 ノードは互いに接続してオブジェクトを転送します。 これらのオブジェクトは、ファイルおよびその他のデータ構造です。 以下では、実際にIPFSについて詳しく見ていくために、様ざな関数を実行するための個々のプロトコルについて見ていきます。
 
-IPFS is peer-to-peer; no nodes are privileged. IPFS nodes store IPFS objects in local storage. Nodes connect to each other and transfer objects. These objects represent files and other data structures. The IPFS Protocol is divided into a stack of sub-protocols responsible for different functionality:
 
 \begin{enumerate}
-  \item \textbf{Identities} - manage node identity generation and verification. Described in Section 3.1.
+  \item \textbf{Identities} - ノードのIdの発行と検証を行います。Section 3.1で説明します。
 
-  \item \textbf{Network} - manages connections to other peers, uses various underlying network protocols. Configurable. Described in Section 3.2.
+  \item \textbf{Network} - 下位の様々な通信プロトコルを利用してピア同士の接続を管理します。変更可能です。Section 3.2で説明します。
 
-  \item \textbf{Routing} - maintains information to locate specific peers and objects. Responds to both local and remote queries. Defaults to a DHT, but is swappable. Described in Section 3.3.
+  \item \textbf{Routing} - オブジェクトや特定のピアの場所に関する情報を保持します。また、ローカルとリモートクエリー両方に応答します。デフォルトでは、DHTが使われていますが変更可能です。Section 3.3で説明します。
 
-  \item \textbf{Exchange} - a novel block exchange protocol (BitSwap) that governs efficient block distribution. Modelled as a market, weakly incentivizes data replication. Trade Strategies swappable. Described in Section 3.4.
+  \item \textbf{Exchange} - 革新的なBlockの交換プロトコルであるBitSwapによって効率的なBlockの交換が行われます。データのコピーを保管することが緩やかなインセンティブとなるようなマーケットを設計します。ブロック交換の戦略は変更可能です。Section 3.4で説明します。
+  
+  \item \textbf{Objects} -   作成後変更できないイミュターブル性と、リンクを持ったコンテンツアドレス型のMerkle DAGです。任意のデータストラクチャーを表現するために使われます。オブジェクトの例としてファイルの階層構造や通信システムなどがこれに当たります。Section 3.5で説明します。
+  
+  \item \textbf{Files} - Gitにインスパイヤーされたファイルのバージョン管理と階層構造を持ったシステムです。 Section 3.6で説明します。.
 
-  \item \textbf{Objects} - a Merkle DAG of content-addressed immutable objects with links. Used to represent arbitrary datastructures, e.g. file hierarchies and communication systems. Described in Section 3.5.
-
-  \item \textbf{Files} - versioned file system hierarchy inspired by Git. Described in Section 3.6.
-
-  \item \textbf{Naming} - A self-certifying mutable name system. Described in Section 3.7.
+  \item \textbf{Naming} - 自己証明(検証)と変更が可能な名前システム。 Section 3.7で説明します。
 \end{enumerate}
 
+これらのサブシステムはそれぞれが独立したものではありません。 これらは組み合わせて活用されているプロパティです。しかし、今列挙したように、それらを別々に記述するとわかりやすいです。
+\\
 
-These subsystems are not independent; they are integrated and leverage
-blended properties. However, it is useful to describe them separately,
-building the protocol stack from the bottom up.
-
-Notation: data structures and functions below are specified in Go syntax.
-
+\textbf{Notation：}以下のデータ構造と関数はGo言語の構文で書かれています。
 \subsection{Identities}
-
-Nodes are identified by a \texttt{NodeId}, the cryptographic hash\footnote{Throughout this document, \textit{hash} and \textit{checksum} refer specifically to cryptographic hashes of data.} of a public-key, created with S/Kademlia's static crypto puzzle~\cite{baumgart07}. Nodes store their public and private keys (encrypted with a passphrase). Users are free to instatiate a ``new'' node identity on every launch, though that loses accrued network benefits. Nodes are incentivized to remain the same.
+ノードは、S/Kademliaの静的な暗号化〜\cite{baumgart07}によって作成された公開鍵をハッシュ化\footnote{このドキュメントでは、ハッシュ(\textit{hash})とチェックサム(\textit{checksum})は、特にデータの暗号学的なハッシュ値という意味で用います.} した\texttt{NodeId}によって識別されます。 ノードは、パブリックキーと(パスフレーズで暗号化されている)プライベートキー保存します。 ユーザーは、ノードの起動時に「新しい」ノードidを自由に作成可能です。しかし、新しくidを発行すると貰えるはずだったネットワークでの報酬がもらえなくなってしまいます。そこで、ユーザーには、ノードのidをそのままにしておく方がいいというインセンティブが働きます。
 
 \begin{verbatim}
       type NodeId Multihash
@@ -209,7 +188,7 @@ Nodes are identified by a \texttt{NodeId}, the cryptographic hash\footnote{Throu
       }
 \end{verbatim}
 
-S/Kademlia based IPFS identity generation:
+S/Kademlia に基づいたIPFSにおけるid生成:
 
 \begin{verbatim}
       difficulty = <integer parameter>
@@ -221,32 +200,34 @@ S/Kademlia based IPFS identity generation:
       } while (p < difficulty)
 \end{verbatim}
 
+今まで接続をしていないピアとの初回の接続の際、ピア同士は公開鍵を交換し、\texttt{hash(other.PublicKey)=other.NodeId}をチェックします。この値が一致しなければ、接続は終了し、値が一致すれば接続を開始します。
 
-Upon first connecting, peers exchange public keys, and check: \texttt{hash(other.PublicKey) equals other.NodeId}. If not, the connection is terminated.
+\paragraph{Note on Cryptographic Functions}
+\hspace{1cm}
 
-\paragraph{Note on Cryptographic Functions} Rather than locking the system to a particular set of function choices, IPFS favors self-describing values. Hash digest values are stored in \texttt{multihash} format, which includes a short header specifying the hash function used, and the digest length in bytes. Example:
-
+IPFSでは、システムで使われる関数を特定の関数やその組み合わせに固定せず、それがそのような関数で実行されたのかを記述するような仕様になっています。 そのため、ハッシュダイジェスト値は、\texttt {マルチハッシュ}形式で保存されます。この形式には、使用されるハッシュ関数を指定する短いヘッダーと、バイト単位でのダイジェスト長が含まれます。 例えば、
 \begin{verbatim}
     <function code><digest length><digest bytes>
 \end{verbatim}
+のように記述されます。
 
-This allows the system to (a) choose the best function for the use case (e.g. stronger security vs faster performance), and (b) evolve as function choices change. Self-describing values allow using different parameter choices compatibly.
+このように冗長性を持たせることによって、(a)(強いセキュリティーが必要な場合やスピードが求められる場合など)ユースケースを考慮して関数を選ぶことができます。(b)暗号学の発展やより良い関数が発明さてたときに新しく良いものを利用でき、それらに互換性をもったせることができます。
 
 \subsection{Network}
-
-IPFS nodes communicate regularly with hundreds of other nodes in the network, potentially across the wide internet. The IPFS network stack features:
+IPFSのノードは、幅広い範囲のネットワーク上の何百もの他のノードと通信をしています。
+ここでは、IPFSのネットワークスタックの特徴について説明します。
 
 \begin{itemize}
-  \item \textbf{Transport:} IPFS can use any transport protocol, and is best suited for WebRTC DataChannels~\cite{WebRTC} (for browser connectivity) or uTP(LEDBAT~\cite{LEDBAT}).
-  \item \textbf{Reliability:} IPFS can provide reliability if underlying networks do not provide it, using uTP (LEDBAT~\cite{LEDBAT}) or SCTP~\cite{SCTP}.
-  \item \textbf{Connectivity:} IPFS also uses the ICE NAT traversal techniques \cite{ICE}.
-  \item \textbf{Integrity:} optionally checks integrity of messages using a hash checksum.
-  \item \textbf{Authenticity:} optionally checks authenticity of messages by digitally signing them with the sender's private key.
+  \item \textbf{Transport:} IPFSは、どのトランスポート層のプロトコルも利用できます。特に、WebRTC DataChannels~\cite{WebRTC} (for browser connectivity)やuTP(LEDBAT~\cite{LEDBAT}).
+  との相性がいいです。
+  \item \textbf{Reliability:} IPFSは、uTP (LEDBAT~\cite{LEDBAT})やSCTP~\cite{SCTP}を利用することで、下位のネットワークに信頼性がなくても信頼性を確保できます。
+  \item \textbf{Connectivity:} IPFSは、ICE-NAT-traversal\cite{ICE}を利用しています。
+  \item \textbf{Integrity:} オプションとして、メッセージのチェックサムを利用してメッセージの完全性を確認できます。
+  \item \textbf{Authenticity:} オプションとして、メッセージの送り手の秘密鍵を用いてデジタル署名をメッセージに添付することができ、これを検証することができます。
 \end{itemize}
 
 \subsubsection{Note on Peer Addressing}
-
-IPFS can use any network; it does not rely on or assume access to IP. This allows IPFS to be used in overlay networks. IPFS stores addresses as \texttt{multiaddr} formatted byte strings for the underlying network to use. \texttt{multiaddr} provides a way to express addresses and their protocols, including support for encapsulation. For example:
+IPFSでは、任意のネットワークを使用することができます。 これは、インターネットプロトコル(IP)のみを頼り、それのみにアクセスするということではありません\footnote{したがって、IPやそのバージョンにも依存しません(翻訳者注)}。 そのため、オーバーレイネットワークでもIPFSを使用することができます。 IPFSは、使用するネットワークに関するアドレスを\texttt {multiaddr}フォーマットでバイト列として保存します。 \texttt {multiaddr}は、使用しているネットワークのプロトコルとそこでのアドレスを記録し、それらをカプセル化する技術を提供します。 例えば、
 
 \begin{verbatim}
   # an SCTP/IPv4 connection
@@ -256,12 +237,15 @@ IPFS can use any network; it does not rely on or assume access to IP. This allow
   /ip4/5.6.7.8/tcp/5678/ip4/1.2.3.4/sctp/1234/
 \end{verbatim}
 
+のように記述されます。
+
 \subsection{Routing}
 
-IPFS nodes require a routing system that can find (a) other peers' network addresses and (b) peers who can serve particular objects. IPFS achieves this using a DSHT based on S/Kademlia and Coral, using the properties discussed in 2.1. The size of objects and use patterns of IPFS are similar to Coral \cite{freedman04} and Mainline~\cite{wang13}, so the IPFS DHT makes a distinction for values stored based on their size. Small values (equal to or less than \texttt{1KB}) are stored directly on the DHT. For larger values, the DHT stores references, which are the \texttt{NodeIds} of peers who can serve the block.
+IPFSのノードは、(a)他のピアノネットワークアドレスと(b)特定のオブジェクトを誰が提供できるのかの両方を見つけるためのルーティングシステムが必要になります。IPFSでは、これを実現するためにSection2.1で説明したS/Kademlia と Coralを基にした、DSHTを用いています。
 
-The interface of this DSHT is the following:
+オブジェクトのサイズとIPFSでの使用方法は、Coral\cite{freedman04}とMainline~\cite{wang13}に似ています。そのため、IPFSにおけるDHTは、そのオブジェクトのサイズに応じて保存する値を決定します。 \texttt{1KB}以下の小さなオブジェクトは、DHTに直接保存されます。大きなサイズの場合、DHTでは、どのピアがそのオブジェクトに関するブロックを提供できるかの参照先を記述します。
 
+ここまでで述べたDSHTのインターフェイスは、以下です:
 \begin{verbatim}
 
   type IPFSRouting interface {
@@ -283,23 +267,15 @@ The interface of this DSHT is the following:
   }
 \end{verbatim}
 
-Note: different use cases will call for substantially different routing systems (e.g. DHT in wide network, static HT in local network). Thus the IPFS routing system can be swapped for one that fits users' needs. As long as the interface above is met, the rest of the system will continue to function.
+Note: このルーティングシステムは、それぞれのユースケースの合わせて、DHT以外を用いることもできます。(例えば、広域なネットワークであればDHTで良いですが、ローカルネットワークであれば、static-HTなども使用できます。) そのため、IPFSは、ユーザーのニーズに合わせて使いたいルーティングシステムに取り替え可能です。異なるルーティングシステムを運用する際、インターフェイスが
+既存もので十分で有る限り、その他の機能はそのままで動作します。
 
 \subsection{Block Exchange - BitSwap Protocol}
 
-In IPFS, data distribution happens by exchanging blocks with peers using a
-BitTorrent inspired protocol: BitSwap. Like BitTorrent, BitSwap peers are
-looking to acquire a set of blocks (\texttt{want\_list}), and have another set
-of blocks to offer in exchange (\texttt{have\_list}).
-Unlike BitTorrent, BitSwap is not limited to the blocks in one torrent.
-BitSwap operates as a persistent marketplace where node can acquire the
-blocks they need, regardless of what files those blocks are part of. The
-blocks could come from completely unrelated files in the filesystem.
-Nodes come together to barter in the marketplace.
-
-While the notion of a barter system implies a virtual currency could be
-created, this would require a global ledger to track ownership
-and transfer of the currency. This can be implemented as a BitSwap Strategy, and will be explored in a future paper.
+IPFSでのデータ配信は、ピアがBitTorrentにインスパイアされたBitSwapというプロトコルを用いてブロックを交換することによって行われます。
+BitTorrentのようにBitSwapを用いることで、ピアは(\texttt {want \_list})でブロックの集合を取得し、すでに持っている別のブロックを(\texttt {have \_list})で提供し、交換します。
+一方、BitTorrentとは異なりBitSwapは1トレントのブロックに限定されません。
+BitSwapは永続的な市場として機能し、ノードはブロックにどのファイルに含まれているかにかかわらず必要なブロックを取得します。そのため、取得するブロックはファイルシステム内の完全に無関係なファイルから来る可能性があります。
 
 In the base case, BitSwap nodes have to provide direct value to each other
 in the form of blocks. This works fine when the distribution of blocks across
@@ -309,6 +285,8 @@ blocks. In the case that a node has nothing that its peers want (or
 nothing at all), it seeks the pieces its peers want, with lower
 priority than what the node wants itself. This incentivizes nodes to cache and
 disseminate rare pieces, even if they are not interested in them directly.
+
+%メモに翻訳あり
 
 \subsubsection{BitSwap Credit}
 
@@ -350,28 +328,7 @@ Let the \textit{debt ratio} $ r $ between a node and its peer be:
 Given $r$, let the probability of sending to a debtor be:
   \[ P\Big( \; send \; | \; r \;\Big) = 1 - \dfrac{1}{1 + exp(6-3r)} \]
 
-\begin{figure}
-\centering
-\begin{tikzpicture}[domain=0:4]
 
-    \draw[->] (-0,0) -- (4.2,0) node[right] {$r$};
-    \draw[->] (0,-0) -- (0,1.20) node[above] {$P(\;send\;|\;r\;)$};
-
-    %ticks
-    \foreach \x in {0,...,4}
-      \draw (\x,1pt) -- (\x,-3pt)
-        node[anchor=north] {\x};
-
-    \foreach \y in {1,...,1}
-      \draw (1pt,\y) -- (-3pt,\y)
-        node[anchor=east] {\y};
-
-    \draw[color=red] plot[] function{1 - 1/(1+exp(6-3*x))};
-
-\end{tikzpicture}
-\caption{Probability of Sending as $r$ increases}
-\label{fig:psending-graph}
-\end{figure}
 
 As you can see in Figure \ref{fig:psending-graph}, this function drops off quickly as the nodes'
 \textit{debt ratio} surpasses twice the established credit.
@@ -771,45 +728,6 @@ indirect blocks. Since \texttt{lists} can contain other \texttt{lists}, topologi
 
 
 \begin{figure}
-\centering
-\begin{tikzpicture}[->,>=stealth',auto,thick,
-  minimum height=2em,minimum width=5em]
-
-  \tikzstyle{ghost}=[rectangle,rounded corners=.8ex];
-  \tikzstyle{block}=[rectangle,draw,fill=blue!20,rounded corners=.8ex];
-  \tikzstyle{list}=[rectangle,draw,fill=cyan!20,rounded corners=.8ex];
-  \tikzstyle{tree}=[rectangle,draw,fill=green!20,rounded corners=.8ex];
-  \tikzstyle{commit}=[rectangle,draw,fill=magenta!20,rounded corners=.8ex];
-  \tikzstyle{every path}=[draw]
-
-  \node[commit] (ccc111) {ccc111};
-  \node[tree]   (ttt111) [below=3em of ccc111] {ttt111};
-  \node[tree]   (ttt222) [below left=3em and 3em of ttt111] {ttt222};
-  \node[tree]   (ttt333) [below=3em of ttt111] {ttt333};
-  \node[ghost]  (ghost1) [below right=3em and 3em of ttt111] {};
-  \node[list]   (lll111) [below=3em of ttt333] {lll111};
-  \node[block]  (bbb111) [below=3em of ttt222] {bbb111};
-  \node[block]  (bbb222) [below right=3em and 3em of ttt333] {bbb222};
-  \node[block]  (bbb333) [below left=3em and 3em of lll111] {bbb333};
-  \node[block]  (bbb444) [below=3em of lll111] {bbb444};
-  \node[block]  (bbb555) [below right=3em and 3em of lll111] {bbb555};
-
-  \path[every node/.style={font=\sffamily\small}]
-    (ccc111) edge[out=-90,in=90] (ttt111)
-    (ttt111) edge[out=-90,in=90] (ttt222)
-             edge[out=-90,in=90] (ttt333)
-             to  [out=-90,in=90]  (ghost1)
-             to  [out=-90,in=90] (bbb222)
-    (ttt222) edge[out=-90,in=90] (bbb111)
-    (ttt333) edge[out=-90,in=90] (lll111)
-             edge[out=-90,in=90] (bbb222)
-    (lll111) edge[out=-90,in=90] (bbb333)
-             edge[out=-90,in=90] (bbb444)
-             edge[out=-90,in=90] (bbb555)
-  ;
-
-\end{tikzpicture}
-\caption{Sample Object Graph} \label{fig:sample-object-graph}
 
 \begin{verbatim}
     > ipfs file-cat <ccc111-hash> --json
@@ -1141,3 +1059,4 @@ IPFS is the synthesis of many great ideas and systems. It would be impossible to
 %\balancecolumns
 %\subsection{References}
 \end{document}
+

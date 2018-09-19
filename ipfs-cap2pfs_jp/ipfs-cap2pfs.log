@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.8.1-180226-2.6 (utf8.euc) (TeX Live 2018) (preloaded format=platex 2018.9.10)  10 SEP 2018 23:32
+This is e-pTeX, Version 3.14159265-p3.8.1-180226-2.6 (utf8.euc) (TeX Live 2018) (preloaded format=platex 2018.9.11)  19 SEP 2018 12:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -528,34 +528,34 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 (./ipfs-cap2pfs.aux)
 \openout1 = `ipfs-cap2pfs.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
  ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 26.
+LaTeX Font Info:    Try loading font information for U+msa on input line 27.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 26.
+LaTeX Font Info:    Try loading font information for U+msb on input line 27.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 26.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 27.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -566,347 +566,217 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 33.
 
 
-LaTeX Warning: Citation `AFS' on page \thepage  undefined on input line 33.
-
-
-LaTeX Warning: Citation `Oceanstore' on page \thepage  undefined on input line 
-33.
-
-
-LaTeX Warning: Citation `CFS' on page \thepage  undefined on input line 33.
-
-
-LaTeX Warning: Citation `BitTorrentUsers' on page \thepage  undefined on input 
+LaTeX Warning: Citation `Oceanstore、CFS' on page \thepage  undefined on input 
 line 33.
 
 
-LaTeX Warning: Citation `wang13' on page \thepage  undefined on input line 33.
-
-
 LaTeX Warning: Citation `Camlistore' on page \thepage  undefined on input line 
-39.
+44.
 
 
-LaTeX Warning: Citation `Dat' on page \thepage  undefined on input line 39.
-
-
-LaTeX Warning: Citation `mashtizadeh13' on page \thepage  undefined on input li
-ne 39.
+LaTeX Warning: Citation `Dat' on page \thepage  undefined on input line 44.
 
 
 LaTeX Font Warning: Font shape `JT1/mc/m/it' undefined
-(Font)              using `JT1/mc/m/n' instead on input line 41.
+(Font)              using `JT1/mc/m/n' instead on input line 48.
 
 
 LaTeX Font Warning: Font shape `JY1/mc/m/it' undefined
-(Font)              using `JY1/mc/m/n' instead on input line 41.
+(Font)              using `JY1/mc/m/n' instead on input line 48.
 
 
-LaTeX Warning: Citation `maymounkov02' on page \thepage  undefined on input lin
-e 53.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-LaTeX Warning: Citation `wang13' on page \thepage  undefined on input line 67.
-
-[1
+ [1
 
 
 ]
-
-LaTeX Warning: Citation `freedman04' on page \thepage  undefined on input line 
-76.
-
 (I search kanjifont definition file: . . ) (I search font definition file: . .
 . . . . . )
-LaTeX Font Info:    Try loading font information for T1+aett on input line 88.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 83.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-
-LaTeX Warning: Citation `freedman04' on page \thepage  undefined on input line 
-98.
-
-
-Overfull \hbox (4.0215pt too wide) in paragraph at lines 95--100
-\T1/aer/m/n/9 ``find-ing nearby data with-out query-ing dis-tant nodes'' [\T1/a
-er/bx/n/9 ?\T1/aer/m/n/9 ]
- []
-
-
-LaTeX Warning: Citation `baumgart07' on page \thepage  undefined on input line 
-105.
-
-
-LaTeX Warning: Citation `cohen03' on page \thepage  undefined on input line 119
-.
-
-
-LaTeX Warning: Citation `levin08' on page \thepage  undefined on input line 129
-.
-
-
-Overfull \hbox (6.95523pt too wide) in paragraph at lines 128--130
-\T1/aer/m/n/9 ex-ploita-tive band-width shar-ing strate-gies. Prop-Share [\T1/a
-er/bx/n/9 ?\T1/aer/m/n/9 ]
- []
-
-
-Overfull \hbox (4.33636pt too wide) in paragraph at lines 135--136
-\T1/aer/m/n/9 chang-ing over time and dis-tribute dif-fer-ent ver-sions ef-fi-c
-iently.
- []
-
-
-LaTeX Warning: Citation `mazieres98' on page \thepage  undefined on input line 
-149.
-
-
-LaTeX Warning: Citation `mazieres00' on page \thepage  undefined on input line 
-149.
-
 [2]
-Overfull \hbox (1.62833pt too wide) in paragraph at lines 176--177
-[]\T1/aer/bx/n/9 Exchange \T1/aer/m/n/9 - a novel block ex-change pro-to-col (B
-itSwap)
- []
-
-
-Underfull \hbox (badness 1132) in paragraph at lines 194--194
-[][]\T1/aer/m/n/9 Throughout this doc-u-ment, \T1/aer/m/it/9 hash \T1/aer/m/n/9
- and \T1/aer/m/it/9 check-sum \T1/aer/m/n/9 re-fer
- []
-
-
-LaTeX Warning: Citation `baumgart07' on page \thepage  undefined on input line 
-194.
-
-
-Overfull \hbox (9.94414pt too wide) in paragraph at lines 222--222
+Overfull \hbox (9.94414pt too wide) in paragraph at lines 201--201
 []        \T1/aett/m/n/9 p = count_preceding_zero_bits(hash(n.NodeId))[] 
  []
 
-
-LaTeX Warning: Citation `WebRTC' on page \thepage  undefined on input line 240.
-
-
-
-LaTeX Warning: Citation `LEDBAT' on page \thepage  undefined on input line 240.
-
-
-
-LaTeX Warning: Citation `LEDBAT' on page \thepage  undefined on input line 241.
-
-
-
-LaTeX Warning: Citation `SCTP' on page \thepage  undefined on input line 241.
-
-
-LaTeX Warning: Citation `ICE' on page \thepage  undefined on input line 242.
-
-
-LaTeX Warning: Citation `freedman04' on page \thepage  undefined on input line 
-261.
-
-
-LaTeX Warning: Citation `wang13' on page \thepage  undefined on input line 261.
-
-
 [3]
 
-LaTeX Warning: Citation `levin08' on page \thepage  undefined on input line 333
-.
+LaTeX Warning: Citation `WebRTC' on page \thepage  undefined on input line 221.
 
 
-LaTeX Warning: Citation `levin08' on page \thepage  undefined on input line 333
-.
+
+Overfull \hbox (9.08432pt too wide) in paragraph at lines 223--224
+[]\T1/aer/bx/n/9 Reliability: \T1/aer/m/n/9 IPFS \JY1/mc/m/it/9 は 、 \T1/aer/m
+/n/9 uTP (LED-BAT [14]) \JY1/mc/m/it/9 や \T1/aer/m/n/9 SCTP [15]
+ []
+
+[4]
+Overfull \hbox (1.94928pt too wide) in paragraph at lines 311--312
+\T1/aer/m/n/9 possible), to Bit-Thief [8] (ex-ploit-ing a vul-ner-a-bil-ity and
+ never
+ []
 
 
-LaTeX Warning: Citation `levin08' on page \thepage  undefined on input line 333
-.
-
-
-Overfull \hbox (2.86789pt too wide) in paragraph at lines 338--340
+Overfull \hbox (2.86789pt too wide) in paragraph at lines 316--318
 []\T1/aer/m/n/9 be ef-fec-tive with and re-sis-tant to other, un-known strate-
  []
 
-\openout3 = `ipfs-cap2pfs.pgf-plot.gnuplot'.
-
-runsystem(gnuplot ipfs-cap2pfs.pgf-plot.gnuplot)...disabled (restricted).
-
-
-Package pgf Warning: Plot data file `ipfs-cap2pfs.pgf-plot.table' not found. on
- input line 369.
-
 
 LaTeX Warning: Reference `fig:psending-graph' on page \thepage  undefined on in
-put line 376.
+put line 333.
 
 
-Overfull \hbox (1.67198pt too wide) in paragraph at lines 376--387
+Overfull \hbox (1.67198pt too wide) in paragraph at lines 333--344
 \T1/aer/m/n/9 as the nodes' \T1/aer/m/it/9 debt ra-tio \T1/aer/m/n/9 sur-passes
  twice the es-tab-lished credit.
  []
 
-[4]
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 470--470
+
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 427--427
 []      \T1/aett/m/n/9 send_block (block :Block) -> (complete :Bool);[] 
  []
 
-
-Overfull \hbox (4.7758pt too wide) in paragraph at lines 496--502
+[5]
+Overfull \hbox (4.7758pt too wide) in paragraph at lines 453--459
 \T1/aett/m/n/9 last_seen \T1/aer/m/n/9 times-tamp. Then, it com-pares the re-ce
 ived \T1/aett/m/n/9 Ledger
  []
 
 
-Overfull \hbox (13.81113pt too wide) in paragraph at lines 506--510
+Overfull \hbox (13.81113pt too wide) in paragraph at lines 463--467
 []\T1/aer/m/n/9 While the con-nec-tion is open, nodes ad-ver-tise their \T1/aet
 t/m/n/9 want_list
  []
 
-[5]
-Overfull \hbox (4.14857pt too wide) in paragraph at lines 616--616
+[6]
+Overfull \hbox (4.14857pt too wide) in paragraph at lines 573--573
  []\T1/aett/m/n/9 XLYkgq61DYaQ8NhkcqyU7rLcnSa7dSHQ16x 189458 less[] 
  []
 
 
-Overfull \hbox (8.8645pt too wide) in paragraph at lines 616--616
+Overfull \hbox (8.8645pt too wide) in paragraph at lines 573--573
  []\T1/aett/m/n/9 XLHBNmRQ5sJJrdMPuu48pzeyTtRo39tNDR5 19441 script[] 
  []
 
 
-Overfull \hbox (13.58043pt too wide) in paragraph at lines 616--616
+Overfull \hbox (13.58043pt too wide) in paragraph at lines 573--573
  []\T1/aett/m/n/9 XLF4hwVHsVuZ78FZK6fozf8Jj9WEURMbCX4 5286 template[] 
  []
 
 
-Overfull \hbox (8.43875pt too wide) in paragraph at lines 618--619
+Overfull \hbox (8.43875pt too wide) in paragraph at lines 575--576
 []\T1/aer/m/n/9 Resolve string path lookups, such as \T1/aett/m/n/9 foo/bar/baz
 \T1/aer/m/n/9 . Given
  []
 
-[6]
-
-LaTeX Warning: Citation `dean11' on page \thepage  undefined on input line 669.
-
-
-
-Overfull \hbox (1.43738pt too wide) in paragraph at lines 750--755
+[7]
+Overfull \hbox (1.43738pt too wide) in paragraph at lines 707--712
 \T1/aer/m/n/9 made up of sev-eral IPFS \T1/aett/m/n/9 blobs \T1/aer/m/n/9 con-c
 ate-nated to-gether. \T1/aett/m/n/9 lists
  []
 
-[7]
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 770--770
+
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 727--727
 []    \T1/aett/m/n/9 { "hash": "XLYkgq61DYaQ8NhkcqyU7rLcnSa7dSHQ16x",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 770--770
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 727--727
 []    \T1/aett/m/n/9 { "hash": "XLHBNmRQ5sJJrdMPuu48pzeyTtRo39tNDR5",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 770--770
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 727--727
 []    \T1/aett/m/n/9 { "hash": "XLWVQDqxo9Km9zLyquoC9gAP8CL1gWnHZ7z",[] 
  []
 
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 874--874
+[8]
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 792--792
 []    \T1/aett/m/n/9 { "hash": "XLYkgq61DYaQ8NhkcqyU7rLcnSa7dSHQ16x",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 874--874
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 792--792
 []    \T1/aett/m/n/9 { "hash": "XLHBNmRQ5sJJrdMPuu48pzeyTtRo39tNDR5",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 874--874
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 792--792
 []    \T1/aett/m/n/9 { "hash": "XLWVQDqxo9Km9zLyquoC9gAP8CL1gWnHZ7z",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 897--897
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 815--815
 []    \T1/aett/m/n/9 { "hash": "XLa1qMBKiSEEDhojb9FFZ4tEvLf7FEQdhdU",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 897--897
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 815--815
 []    \T1/aett/m/n/9 { "hash": "XLGw74KAy9junbh28x7ccWov9inu1Vo7pnX",[] 
  []
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 897--897
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 815--815
 []    \T1/aett/m/n/9 { "hash": "XLF2ipQ4jD3UdeX5xp1KBgeHRhemUtaA8Vm",[] 
  []
 
-[8]
 
 LaTeX Warning: Citation `RabinFingerprints' on page \thepage  undefined on inpu
-t line 921.
+t line 839.
 
 
-LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 921.
+LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 839.
 
 
-LaTeX Warning: Citation `rsync' on page \thepage  undefined on input line 922.
+LaTeX Warning: Citation `rsync' on page \thepage  undefined on input line 840.
 
 
-Overfull \hbox (5.22821pt too wide) in paragraph at lines 964--964
+Overfull \hbox (5.22821pt too wide) in paragraph at lines 882--882
 []    \T1/aett/m/n/9 "name": "ttt333-name/lll111-name/bbb222-name" },[] 
  []
 
-
-LaTeX Warning: Citation `Plan9' on page \thepage  undefined on input line 979.
-
-
-LaTeX Warning: Citation `Fossil' on page \thepage  undefined on input line 979.
-
-
-
-LaTeX Warning: Citation `Venti' on page \thepage  undefined on input line 979.
-
-
-LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 979.
-
-
-LaTeX Warning: Citation `mazieres98' on page \thepage  undefined on input line 
-983.
-
-
-LaTeX Warning: Citation `mazieres00' on page \thepage  undefined on input line 
-983.
-
 [9]
-Overfull \hbox (9.94414pt too wide) in paragraph at lines 1055--1055
+
+LaTeX Warning: Citation `Plan9' on page \thepage  undefined on input line 897.
+
+
+LaTeX Warning: Citation `Fossil' on page \thepage  undefined on input line 897.
+
+
+
+LaTeX Warning: Citation `Venti' on page \thepage  undefined on input line 897.
+
+
+LaTeX Warning: Citation `LBFS' on page \thepage  undefined on input line 897.
+
+
+Overfull \hbox (9.94414pt too wide) in paragraph at lines 973--973
 []\T1/aett/m/n/9 ipfs link /<alice-pk-hash>/friends/bob /<bob-pk-hash>[] 
  []
 
 
-Overfull \hbox (19.37599pt too wide) in paragraph at lines 1055--1055
+Overfull \hbox (19.37599pt too wide) in paragraph at lines 973--973
 []\T1/aett/m/n/9 ipfs link /<eve-pk-hash>/friends/alice /<alice-pk-hash>[] 
  []
 
 
-LaTeX Warning: Citation `Proquint' on page \thepage  undefined on input line 10
-75.
+LaTeX Warning: Citation `Proquint' on page \thepage  undefined on input line 99
+3.
 
 
-Overfull \hbox (3.25519pt too wide) in paragraph at lines 1102--1103
+Overfull \hbox (3.25519pt too wide) in paragraph at lines 1020--1021
 []\T1/aer/m/n/9 As a mounted global filesys-tem, un-der \T1/aett/m/n/9 /ipfs \T
 1/aer/m/n/9 and \T1/aett/m/n/9 /ipns\T1/aer/m/n/9 . 
  []
 
+[10]
 
-LaTeX Warning: Citation `FUSE' on page \thepage  undefined on input line 1121.
+LaTeX Warning: Citation `FUSE' on page \thepage  undefined on input line 1039.
 
-[10] (./ipfs-cap2pfs.bbl
+(./ipfs-cap2pfs.bbl
 
 LaTeX Font Warning: Font shape `JT1/gt/m/it' undefined
 (Font)              using `JT1/gt/m/n' instead on input line 6.
@@ -915,34 +785,23 @@ LaTeX Font Warning: Font shape `JT1/gt/m/it' undefined
 LaTeX Font Warning: Font shape `JY1/gt/m/it' undefined
 (Font)              using `JY1/gt/m/n' instead on input line 6.
 
+) [11] [12
 
-./ipfs-cap2pfs.bbl:11: Package inputenc Error: Unicode character 袖 (U+C1C5)
-(inputenc)                not set up for use with LaTeX.
+] (./ipfs-cap2pfs.aux)
 
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.11 \newblock Bittorrent and ^^c2^^b5
-                                      torrent software surpass 150 million u...
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-? 
-./ipfs-cap2pfs.bbl:11: Emergency stop.
- ...                                              
-                                                  
-l.11 \newblock Bittorrent and ^^c2^^b5
-                                      torrent software surpass 150 million u...
 
-You may provide a definition with
-\DeclareUnicodeCharacter 
+LaTeX Warning: There were undefined references.
 
- 
+ ) 
 Here is how much of TeX's memory you used:
- 13115 strings out of 493250
- 263084 string characters out of 6144430
- 320463 words of memory out of 5000000
- 16802 multiletter control sequences out of 15000+600000
+ 12934 strings out of 493250
+ 258987 string characters out of 6144430
+ 313526 words of memory out of 5000000
+ 16623 multiletter control sequences out of 15000+600000
  49034 words of font info for 79 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 55i,11n,54p,1259b,907s stack positions out of 5000i,500n,10000p,200000b,80000s
-Output written on ipfs-cap2pfs.dvi (10 pages, 94916 bytes).
+ 55i,11n,54p,894b,342s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on ipfs-cap2pfs.dvi (12 pages, 102004 bytes).
