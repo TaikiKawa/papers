@@ -13,7 +13,7 @@
 
 \begin{document}
 
-\title{IPFS - Content Addressed, Versioned, P2P File System (DRAFT 3)}
+\title{IPFS - Content Addressed, Versioned, P2P File System (DRAFT 3 Japanese version)}
 \subtitle{}
 
 \numberofauthors{1}
@@ -272,19 +272,10 @@ Note: このルーティングシステムは、それぞれのユースケー�
 
 \subsection{Block Exchange - BitSwap Protocol}
 
-In IPFS, data distribution happens by exchanging blocks with peers using a
-BitTorrent inspired protocol: BitSwap. Like BitTorrent, BitSwap peers are
-looking to acquire a set of blocks (\texttt{want\_list}), and have another set
-of blocks to offer in exchange (\texttt{have\_list}).
-Unlike BitTorrent, BitSwap is not limited to the blocks in one torrent.
-BitSwap operates as a persistent marketplace where node can acquire the
-blocks they need, regardless of what files those blocks are part of. The
-blocks could come from completely unrelated files in the filesystem.
-Nodes come together to barter in the marketplace.
-
-While the notion of a barter system implies a virtual currency could be
-created, this would require a global ledger to track ownership
-and transfer of the currency. This can be implemented as a BitSwap Strategy, and will be explored in a future paper.
+IPFSでのデータ配信は、ピアがBitTorrentにインスパイアされたBitSwapというプロトコルを用いてブロックを交換することによって行われます。
+BitTorrentのようにBitSwapを用いることで、ピアは(\texttt {want \_list})でブロックの集合を取得し、すでに持っている別のブロックを(\texttt {have \_list})で提供し、交換します。
+一方、BitTorrentとは異なりBitSwapは1トレントのブロックに限定されません。
+BitSwapは永続的な市場として機能し、ノードはブロックにどのファイルに含まれているかにかかわらず必要なブロックを取得します。そのため、取得するブロックはファイルシステム内の完全に無関係なファイルから来る可能性があります。
 
 In the base case, BitSwap nodes have to provide direct value to each other
 in the form of blocks. This works fine when the distribution of blocks across
@@ -294,6 +285,8 @@ blocks. In the case that a node has nothing that its peers want (or
 nothing at all), it seeks the pieces its peers want, with lower
 priority than what the node wants itself. This incentivizes nodes to cache and
 disseminate rare pieces, even if they are not interested in them directly.
+
+%メモに翻訳あり
 
 \subsubsection{BitSwap Credit}
 
