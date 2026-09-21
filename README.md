@@ -1,4 +1,4 @@
-# IPFS論文 日本語訳
+# IPFS Papers — Japanese Translation / 日本語訳
 
 Japanese translation of IPFS papers.
 IPFSの論文を日本語に翻訳するリポジトリです。
