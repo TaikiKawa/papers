@@ -1,17 +1,12 @@
-# IPFS Papers
+# IPFS論文 日本語訳
 
-> IPFS Papers (not specs)
+IPFSの論文を日本語に翻訳するリポジトリです。
+Japanese translation of IPFS papers.
 
-This is a repository with academic papers on translation of IPFS. 
-WE Will translate it japanese.
+| ディレクトリ | 内容 |
+|---|---|
+| [ipfs-cap2pfs](ipfs-cap2pfs) | 原文（Juan Benet, *IPFS - Content Addressed, Versioned, P2P File System*） |
+| [ipfs-cap2pfs-jp](ipfs-cap2pfs-jp) | 日本語訳 |
 
-For papers that you can read to understand IPFS and the underlying technologies, go to [ipfs/reading-list](https://github.com/ipfs/reading-list).
-
-This repo is primarily the work of @jbenet -- if you're interested in pursuing academic publishing of IPFS, parts of it, or relates systems, get in touch. There is a large constellation of research to be done around IPFS.
-
-# Style of sentense
-
-です、ます調で行う。
-
-# Lisence
-All lisense belongs to https://github.com/ipfs/papers.
+原文リポジトリ: [ipfs/papers](https://github.com/ipfs/papers)
+IPFSを理解するための資料: [ipfs/reading-list](https://github.com/ipfs/reading-list)
