@@ -1,7 +1,7 @@
 # IPFS論文 日本語訳
 
-IPFSの論文を日本語に翻訳するリポジトリです。
 Japanese translation of IPFS papers.
+IPFSの論文を日本語に翻訳するリポジトリです。
 
 | ディレクトリ | 内容 |
 |---|---|
